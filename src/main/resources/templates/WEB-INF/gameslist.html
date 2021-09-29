@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Games List</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<h1>Book List</h1>
+<h2> <a href="addgame">Add new game</a> </h2>
+<br/><br/>
+<div class="container">
+  <table th:align="center" class ="container" border="1">
+    <tr>
+      <th><h1>Title</h1></th>
+      <th><h1>Publisher</h1></th>
+    </tr>
+    <tr th:each ="game : ${games}">
+      <td th:utext="${game.title}">...</td>
+      <td th:utext="${game.publisher}">...</td>
+      <td>
+        <form th:action="@{/deletegame}" th:object="${gameToRemove}" th:method="POST">
+          <input type="hidden" name="title" th:value="${game.title}">
+          <input type="hidden" name="publisher" th:value="${game.publisher}">
+          <input class ="button-main-page" type="submit" value="Удалить" />
+        </form>
+      </td>
+      <td>
+        <form th:action="@{/editgame}" th:object="${gameToEdit}" th:method="GET">
+          <input type="hidden" name="title" th:value="${game.title}">
+          <input type="hidden" name="publisher" th:value="${game.publisher}">
+          <input type="hidden" name="id" th:value="${game.id}">
+          <input class ="button-main-page" type="submit" value="Редактировать" />
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
