@@ -8,8 +8,7 @@
 <body>
 <div class="container" th:align="center">
     <h1>Game:</h1>
-    <form th:action="@{/editgame}"
-          th:object="${gameform}" method="POST">
+    <form th:action="@{/editgame}" th:object="${gameForm}" method="POST">
         <p>Title:
             <input type="text" th:field="*{title}" />
         </p>

@@ -32,3 +32,8 @@ h2 a {
     color: #FB667A;
     text-decoration: none;
 }
+
+.wrapper{
+    margin: 0 auto;
+    width: 100%;
+}
