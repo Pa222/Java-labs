@@ -56,7 +56,7 @@ public class GameService {
     }
 
     public ServiceResult deleteGame(GameDeleteDto info){
-        gamesRepository.deleteById(info.id);
+        gamesRepository.deleteGame(info.id);
 
         return new ServiceResult(ServiceCode.OK, "Game successfully deleted");
     }

@@ -3,6 +3,7 @@ package com.example.lab1.repos;
 import com.example.lab1.model.Game;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,8 @@ public interface GamesRepository extends CrudRepository<Game, Long>{
                     @Param("gameDescription") String gameDescription
     );
 
-    Iterable<Game> findByTitleContains(String Title);
+    @Procedure(value = "DeleteGame")
+    void deleteGame(Long gameId);
 
     @Query(value = "select * from Games order by price asc", nativeQuery = true)
     Iterable<Game> findAllSortedByPriceAscending();
