@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Person</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/deletegame.css}"/>
+</head>
+<body>
+<div class="container" th:align="center">
+    <h1>List of games:</h1>
+    <table th:each="game : ${games}">
+        <tr>
+            <td class="table__col" th:utext="${game.id}"></td>
+            <td class="table__col" th:utext="${game.title}"></td>
+            <td class="table__col">
+                <form th:action="@{/deletegame}" th:object="${Game}" method="POST">
+                    <input type="hidden" name="id" th:value="${game.id}">
+                    <input type="submit" value="Удалить">
+                </form>
+            </td>
+            <td class="table__col">
+                <form th:action="@{/editgame}" th:object="${Game}" method="GET">
+                    <input type="hidden" name="id" th:value="${game.id}">
+                    <input type="submit" value="Редактировать">
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<div th:if="${message}" th:utext="${message}"
+     style="color:red;font-style:italic; text-align: center">
+</div>
+</body>

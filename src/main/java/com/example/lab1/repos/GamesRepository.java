@@ -10,14 +10,29 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface GamesRepository extends CrudRepository<Game, Long>{
     @Modifying
-    @Query(value = "insert into Games (publisher, title) values (:publisher, :title)", nativeQuery = true)
+    @Query(value = "insert into Games (publisher, title, rating, price, game_description) " +
+            "values (:publisher, :title, :rating, :price, :gameDescription)", nativeQuery = true)
     @Transactional
-    void addNewGame(@Param("publisher") String publisher, @Param("title") String title);
+    void addNewGame(
+            @Param("publisher") String publisher,
+            @Param("title") String title,
+            @Param("rating") String rating,
+            @Param("price") float price,
+            @Param("gameDescription") String gameDescription
+    );
 
     @Modifying
-    @Query(value = "update Games set publisher = :publisher, title = :title where id = :id", nativeQuery = true)
+    @Query(value = "update Games set publisher = :publisher, title = :title, rating = :rating, " +
+            " price = :price, game_description = :gameDescription where id = :id", nativeQuery = true)
     @Transactional
-    void updateGame(@Param("publisher") String publisher, @Param("title") String title, @Param("id") Long id);
+    void updateGame(
+                    @Param("id") Long id,
+                    @Param("publisher") String publisher,
+                    @Param("title") String title,
+                    @Param("rating") String rating,
+                    @Param("price") float price,
+                    @Param("gameDescription") String gameDescription
+    );
 
     Iterable<Game> findByTitleContains(String Title);
 

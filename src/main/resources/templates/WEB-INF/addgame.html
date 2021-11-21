@@ -4,22 +4,36 @@
     <meta charset="UTF-8" />
     <title>Add Person</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/addgame.css}"/>
 </head>
 <body>
 <div class="container" th:align="center">
     <h1>New game:</h1>
-    <form th:action="@{/addgame}"
-          th:object="${gameform}" method="POST">
-        <p>Title:
-            <input type="text" th:field="*{title}" />
-        </p>
-        <p> Publisher:
-            <input type="text" th:field="*{publisher}" />
-        </p>
+    <form th:action="@{/addgame}" th:object="${gameDto}" method="POST">
+        <div class="form__block">
+            <label for="title">Title</label>
+            <input class="form__input" id="title" name="title" type="text">
+        </div>
+        <div class="form__block">
+            <label for="publisher">Publisher</label>
+            <input class="form__input" id="publisher" name="publisher" type="text">
+        </div>
+        <div class="form__block">
+            <label for="price">Price</label>
+            <input class="form__input" id="price" name="price" type="number" min="0" max="100">
+        </div>
+        <div class="form__block">
+            <label for="rating">Rating</label>
+            <input class="form__input" id="rating" name="rating" type="text" maxlength="3">
+        </div>
+        <div class="form__block">
+            <label for="description">Description</label>
+            <textarea class="form__textarea" id="description" name="gameDescription" cols="60" rows="10" maxlength="4000"></textarea>
+        </div>
         <input class ="button-main-page" type="submit" value="Add" />
     </form>
 </div>
-<div th:if="${errorMessage}" th:utext="${errorMessage}"
+<div th:if="${message}" th:utext="${message}"
      style="color:red;font-style:italic; text-align: center">
 </div>
 </body>

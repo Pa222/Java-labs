@@ -12,6 +12,9 @@
     <div class="header">
         <a class="header__link" th:href="@{/catalog}">Catalog</a>
         <a class="header__link">Basket</a>
+        <a class="header__link" th:href="@{/login-page}">Sing in</a>
+        <a class="header__link" th:href="@{/addgame}">Add Game</a>
+        <a class="header__link" th:href="@{/editgames}">Edit Games</a>
     </div>
     <div class="catalog">
         <form th:action="@{/catalog}" th:object="${filters}" method="GET">
@@ -33,13 +36,11 @@
                 </div>
                 <div class="catalog__sorts">
                     <label>Сортировать по: </label>
-<!--                    <a class="catalog__sort-link">стоимости</a>-->
-<!--                    <a class="catalog__sort-link">наименованию</a>-->
                     <select onchange="this.form.submit()" th:field="*{sort}">
-                        <option th:value="priceAsc" selected>Цена: возрастание</option>
-                        <option th:value="priceDesc">Цена: убывание</option>
-                        <option th:value="TitleAsc">Наименование: возрастание</option>
+                        <option th:value="TitleAsc" selected>Наименование: возрастание</option>
                         <option th:value="TitleDesc">Наименование: убывание</option>
+                        <option th:value="priceAsc">Цена: возрастание</option>
+                        <option th:value="priceDesc">Цена: убывание</option>
                     </select>
                 </div>
             </div>

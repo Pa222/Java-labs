@@ -1,9 +1,13 @@
 package com.example.lab1.controllers;
 
 import com.example.lab1.UserContext;
-import com.example.lab1.forms.UserForm;
+import com.example.lab1.dto.UserLoginDto;
+import com.example.lab1.dto.UserRegisterDto;
 import com.example.lab1.model.User;
 import com.example.lab1.repos.UsersRepository;
+import com.example.lab1.services.ServiceCode;
+import com.example.lab1.services.ServiceResult;
+import com.example.lab1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,9 @@ public class LoginController {
     @Autowired
     UsersRepository usersRepository;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping("/login-page")
     private ModelAndView loginPage(){
         ModelAndView modelAndView = new ModelAndView();
@@ -29,23 +36,17 @@ public class LoginController {
         return modelAndView;
     }
 
-    @GetMapping("/login")
-    private ModelAndView login(Model model, @ModelAttribute("User") User user){
+    @PostMapping("/login")
+    private ModelAndView login(Model model, @ModelAttribute("User") UserLoginDto user){
         ModelAndView modelAndView = new ModelAndView();
 
-        User dbUser = usersRepository.findByLogin(user.getLogin());
+        ServiceResult serviceResult = userService.login(user);
 
-        if (dbUser == null){
-            modelAndView.setViewName("Log in");
-            model.addAttribute("errorMessage", "Пользователь не найден");
-            return modelAndView;
-        } else if (!Objects.equals(dbUser.getPassword(), user.getPassword())){
-            modelAndView.setViewName("Log in");
-            model.addAttribute("errorMessage", "Пароль не верный");
+        if (serviceResult.id == ServiceCode.BAD_REQUEST){
+            model.addAttribute("errorMessage", serviceResult.message);
+            modelAndView.setViewName("Log In");
             return modelAndView;
         }
-
-        UserContext.getInstance().value = dbUser;
 
         modelAndView.setViewName("redirect:/index");
         return modelAndView;
@@ -59,7 +60,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    private ModelAndView register(Model model, @ModelAttribute("User") @Valid UserForm userForm, BindingResult result){
+    private ModelAndView register(Model model, @ModelAttribute("User") @Valid UserRegisterDto user, BindingResult result){
         ModelAndView modelAndView = new ModelAndView();
 
         if (result.hasErrors()){
@@ -67,15 +68,16 @@ public class LoginController {
             modelAndView.setViewName("Register");
             return modelAndView;
         }
-        else if (!Objects.equals(userForm.getPassword(), userForm.getRepeatPassword())){
-            model.addAttribute("errorMessage", "Пароли не совпадают");
+
+        ServiceResult serviceResult = userService.register(user);
+
+        if (serviceResult.id == ServiceCode.BAD_REQUEST){
+            model.addAttribute("errorMessage", serviceResult.message);
             modelAndView.setViewName("Register");
             return modelAndView;
         }
 
-        usersRepository.addNewUser(userForm.getLogin(), userForm.getPassword());
-
-        modelAndView.setViewName("redirect:");
+        modelAndView.setViewName("redirect:/login-page");
         return modelAndView;
     }
 }

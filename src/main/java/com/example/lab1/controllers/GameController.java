@@ -1,8 +1,14 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.dto.GameDeleteDto;
+import com.example.lab1.dto.GameDto;
+import com.example.lab1.dto.GameEditDto;
 import com.example.lab1.forms.GameForm;
 import com.example.lab1.model.Game;
 import com.example.lab1.repos.GamesRepository;
+import com.example.lab1.services.GameService;
+import com.example.lab1.services.ServiceCode;
+import com.example.lab1.services.ServiceResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,78 +27,101 @@ import javax.validation.Valid;
 @Controller
 public class GameController {
     @Autowired
-    private GamesRepository gamesRepository;
+    private GameService gameService;
 
-    // Вводится (inject) из application.properties.
-    @Value("${welcome.message}")
-    private String message;
     @Value("${error.message}")
     private String allFieldsAreRequiredMessage;
 
     //Добавление
     @GetMapping(value = {"/addgame"})
     public ModelAndView showAddGamePage(Model model) {
-        ModelAndView modelAndView = new ModelAndView("addgame");
-        GameForm gameform = new GameForm();
-        model.addAttribute("gameform", gameform);
-        log.info("/addgame was called");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addgame");
         return modelAndView;
     }
 
     @PostMapping(value = {"/addgame"})
     public ModelAndView saveNewGame(Model model,
-                                    @ModelAttribute("gameform") @Valid GameForm gameForm, BindingResult result) {
+                                    @ModelAttribute("gameDto") @Valid GameDto game, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/allgames");
+        modelAndView.setViewName("addgame");
+
+        System.out.println(game.title + ' ' + game.publisher + ' ' + game.price + ' ' + game.rating + ' ' + game.gameDescription);
+
         if (result.hasErrors()){
-            modelAndView.setViewName("addgame");
-            model.addAttribute("errorMessage", allFieldsAreRequiredMessage);
+            model.addAttribute("message", allFieldsAreRequiredMessage);
             return modelAndView;
         }
-        gamesRepository.addNewGame(gameForm.getPublisher(), gameForm.getTitle());
-        model.addAttribute("games", gamesRepository.findAll());
-        log.info("Game was added");
+
+        ServiceResult serviceResult = gameService.addGame(game);
+
+        if (serviceResult.id == ServiceCode.BAD_REQUEST){
+            model.addAttribute("message", serviceResult.message);
+            return modelAndView;
+        }
+
+        model.addAttribute("message", "Game successfully added");
+
+        return modelAndView;
+    }
+
+    @GetMapping(value = {"editgames"})
+    public ModelAndView delete(Model model){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editGames");
+        model.addAttribute("games", gameService.getGames());
         return modelAndView;
     }
 
     //Удаление
     @PostMapping(value = {"/deletegame"})
-    public String deleteGame(Model model, @ModelAttribute("gameToRemove") Game game){
-        gamesRepository.deleteById(game.getId());
+    public ModelAndView deleteGame(Model model, @ModelAttribute("Game") GameDeleteDto game){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editGames");
 
-        log.info("Game was removed");
-        model.addAttribute("games", gamesRepository.findAll());
+        ServiceResult result = gameService.deleteGame(game);
 
-        return  "redirect:/allgames";
+        model.addAttribute("games", gameService.getGames());
+        model.addAttribute("message", result.message);
+        return modelAndView;
+//        gamesRepository.deleteById(game.getId());
+//
+//        model.addAttribute("games", gameService.getGames());
+//
+//        return  "redirect:/allgames";
     }
 
     //Редактирование
     @GetMapping(value = {"/editgame"})
-    public ModelAndView editGamePage(Model model, @ModelAttribute("gameToEdit") Game game){
+    public ModelAndView editGamePage(Model model, @ModelAttribute("Game") GameEditDto game){
         ModelAndView modelAndView = new ModelAndView("editgame");
-        Game toChange = gamesRepository.findById(game.getId()).get();
-        GameForm gameform = new GameForm(toChange.getTitle(), toChange.getPublisher(), toChange.getId());
-        model.addAttribute("gameForm", gameform);
-        log.info("/editgame was called");
+        model.addAttribute("Game", gameService.getGameById(game.id));
         return modelAndView;
     }
 
     @PostMapping(value = {"/editgame"})
     public ModelAndView editGame(Model model,
-                                 @ModelAttribute("gameForm") @Valid Game game, BindingResult result){
+                                 @ModelAttribute("Game") @Valid GameEditDto game, BindingResult result){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/allgames");
 
         if (result.hasErrors()){
             modelAndView.setViewName("editgame");
-            model.addAttribute("errorMessage", allFieldsAreRequiredMessage);
+            model.addAttribute("message", allFieldsAreRequiredMessage);
             return modelAndView;
         }
 
-        gamesRepository.updateGame(game.getPublisher(), game.getTitle(), game.getId());
-        model.addAttribute("games", gamesRepository.findAll());
+        ServiceResult serviceresult = gameService.editGame(game);
 
-        log.info("Game was edited");
+        if (serviceresult.id == ServiceCode.BAD_REQUEST){
+            modelAndView.setViewName("editgame");
+            model.addAttribute("message", serviceresult.message);
+            return modelAndView;
+        }
+
+        modelAndView.setViewName("editgames");
+        model.addAttribute("games", gameService.getGames());
+        model.addAttribute("message", serviceresult.message);
+
         return modelAndView;
     }
 
