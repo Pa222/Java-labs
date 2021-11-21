@@ -5,8 +5,16 @@
     <title>Registration</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/loginForm.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
 </head>
 <body>
+<div class="header">
+    <a class="header__link" th:href="@{/catalog}">Catalog</a>
+    <a class="header__link">Basket</a>
+    <a class="header__link" th:href="@{/login-page}">Sing in</a>
+    <a class="header__link" th:href="@{/addgame}">Add Game</a>
+    <a class="header__link" th:href="@{/editgames}">Edit Games</a>
+</div>
     <div class="wrapper">
         <div class="form-container">
             <form th:action="@{/register}" th:object="${User}" th:method="POST">
