@@ -48,7 +48,7 @@
         <div class="catalog__items" th:each ="game : ${games}">
             <div class="catalog__item">
                 <p class="catalog__title">[[${game.title}]] ([[${game.rating}]])</p>
-                <p class="catalog__publisher" th:utext="${game.publisher}"></p>
+                <p class="catalog__publisher" th:utext="${game.publisher.publisherName}"></p>
                 <p class="catalog__description" th:utext="${game.gameDescription}"></p>
                 <label class="catalog__price">Стоимость: [[${game.price}]]$</label>
                 <input class="catalog__basket-button" type="button" value="В корзину">

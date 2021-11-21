@@ -5,7 +5,9 @@ import com.example.lab1.dto.GameDto;
 import com.example.lab1.dto.GameEditDto;
 import com.example.lab1.forms.GameForm;
 import com.example.lab1.model.Game;
+import com.example.lab1.model.Publisher;
 import com.example.lab1.repos.GamesRepository;
+import com.example.lab1.repos.PublisherRepository;
 import com.example.lab1.services.GameService;
 import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
@@ -29,6 +31,9 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
+    @Autowired
+    private PublisherRepository publisherRepository;
+
     @Value("${error.message}")
     private String allFieldsAreRequiredMessage;
 
@@ -37,6 +42,7 @@ public class GameController {
     public ModelAndView showAddGamePage(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addgame");
+        model.addAttribute("Publishers", publisherRepository.findAll());
         return modelAndView;
     }
 
@@ -50,6 +56,7 @@ public class GameController {
 
         if (result.hasErrors()){
             model.addAttribute("message", allFieldsAreRequiredMessage);
+            model.addAttribute("Publishers", publisherRepository.findAll());
             return modelAndView;
         }
 
@@ -57,10 +64,12 @@ public class GameController {
 
         if (serviceResult.id == ServiceCode.BAD_REQUEST){
             model.addAttribute("message", serviceResult.message);
+            model.addAttribute("Publishers", publisherRepository.findAll());
             return modelAndView;
         }
 
         model.addAttribute("message", "Game successfully added");
+        model.addAttribute("Publishers", publisherRepository.findAll());
 
         return modelAndView;
     }
@@ -96,6 +105,7 @@ public class GameController {
     public ModelAndView editGamePage(Model model, @ModelAttribute("Game") GameEditDto game){
         ModelAndView modelAndView = new ModelAndView("editgame");
         model.addAttribute("Game", gameService.getGameById(game.id));
+        model.addAttribute("Publishers", publisherRepository.findAll());
         return modelAndView;
     }
 
@@ -107,6 +117,8 @@ public class GameController {
         if (result.hasErrors()){
             modelAndView.setViewName("editgame");
             model.addAttribute("message", allFieldsAreRequiredMessage);
+            model.addAttribute("Publishers", publisherRepository.findAll());
+
             return modelAndView;
         }
 
@@ -115,6 +127,8 @@ public class GameController {
         if (serviceresult.id == ServiceCode.BAD_REQUEST){
             modelAndView.setViewName("editgame");
             model.addAttribute("message", serviceresult.message);
+            model.addAttribute("Publishers", publisherRepository.findAll());
+
             return modelAndView;
         }
 

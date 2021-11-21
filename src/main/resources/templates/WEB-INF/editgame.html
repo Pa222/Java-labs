@@ -14,10 +14,9 @@
             <label for="title">Title</label>
             <input class="form__input" id="title" name="title" type="text" th:value="*{title}">
         </div>
-        <div class="form__block">
-            <label for="publisher">Publisher</label>
-            <input class="form__input" id="publisher" name="publisher" type="text" th:value="*{publisher}">
-        </div>
+        <select name="publisher">
+            <option th:each="publisher: ${Publishers}" th:value="${publisher.publisherName}">[[${publisher.publisherName}]]</option>
+        </select>
         <div class="form__block">
             <label for="price">Price</label>
             <input class="form__input" id="price" name="price" type="number" min="0" max="100" th:value="*{price}">

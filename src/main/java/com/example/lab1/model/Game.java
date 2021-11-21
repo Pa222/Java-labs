@@ -11,16 +11,16 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity ///////////////////////////////////////////
-@Table(name="Games") ///////////////////////////////
+@Entity
+@Table(name="Games")
 public class Game {
     @NotBlank
     @NotNull
     private String title;
 
-    @NotBlank
-    @NotNull
-    private String publisher;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "publisher_id", referencedColumnName = "id")
+    private Publisher publisher;
 
     @NotBlank
     @NotNull
@@ -32,11 +32,11 @@ public class Game {
 
     private float price;
 
-    @Id /////////////////////////////////
-    @GeneratedValue(strategy = GenerationType.IDENTITY) /////////////////////////////
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Game(String title, String publisher){
+    public Game(String title, Publisher publisher){
         this.title = title;
         this.publisher = publisher;
     }

@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface GamesRepository extends CrudRepository<Game, Long>{
     @Modifying
-    @Query(value = "insert into Games (publisher, title, rating, price, game_description) " +
+    @Query(value = "insert into Games (publisher_id, title, rating, price, game_description) " +
             "values (:publisher, :title, :rating, :price, :gameDescription)", nativeQuery = true)
     @Transactional
     void addNewGame(
-            @Param("publisher") String publisher,
+            @Param("publisher") Long publisher,
             @Param("title") String title,
             @Param("rating") String rating,
             @Param("price") float price,
@@ -22,12 +22,12 @@ public interface GamesRepository extends CrudRepository<Game, Long>{
     );
 
     @Modifying
-    @Query(value = "update Games set publisher = :publisher, title = :title, rating = :rating, " +
+    @Query(value = "update Games set publisher_id = :publisher, title = :title, rating = :rating, " +
             " price = :price, game_description = :gameDescription where id = :id", nativeQuery = true)
     @Transactional
     void updateGame(
                     @Param("id") Long id,
-                    @Param("publisher") String publisher,
+                    @Param("publisher") Long publisher,
                     @Param("title") String title,
                     @Param("rating") String rating,
                     @Param("price") float price,
