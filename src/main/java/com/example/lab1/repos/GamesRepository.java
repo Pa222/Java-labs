@@ -19,6 +19,12 @@ public interface GamesRepository extends CrudRepository<Game, Long>{
     @Procedure(value = "DeleteGame")
     void deleteGame(Long gameId);
 
+    @Query(value = "exec GetGames", nativeQuery = true)
+    Iterable<Game> getGames();
+
+    @Query(value = "exec GetGameById :id", nativeQuery = true)
+    Game getGameById(@Param("id") Long id);
+
     @Query(value = "exec GetGamesByPriceAscending", nativeQuery = true)
     Iterable<Game> getGamesByPriceAscending();
 

@@ -7,7 +7,15 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 public interface PublisherRepository extends CrudRepository<Publisher, Long> {
-
-    @Query(value = "SELECT * FROM Publishers WHERE publisher_name = :name", nativeQuery = true)
+    @Query(value = "exec GetPublisherByName :name", nativeQuery = true)
     Publisher findByName(@Param("name") String name);
+
+    @Query(value = "exec GetPublishers", nativeQuery = true)
+    Iterable<Publisher> getPublishers();
+
+    @Query(value = "exec AddPublisher :name", nativeQuery = true)
+    Iterable<Publisher> addPublisher(@Param("name") String name);
+
+    @Query(value = "exec DeletePublisher :id", nativeQuery = true)
+    Iterable<Publisher> deletePublisher(@Param("id") Long id);
 }

@@ -23,7 +23,7 @@ public class GameService {
 
     private final Pattern _pattern = Pattern.compile("\\d{2}\\+|\\d\\+");
 
-    public Game getGameById(Long id) { return gamesRepository.findById(id).get(); }
+    public Game getGameById(Long id) { return gamesRepository.getGameById(id); }
 
     public ServiceResult addGame(GameDto info){
 
@@ -62,6 +62,6 @@ public class GameService {
     }
 
     public Iterable<Game> getGames(){
-        return gamesRepository.findAll();
+        return gamesRepository.getGames();
     }
 }

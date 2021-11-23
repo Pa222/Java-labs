@@ -20,7 +20,7 @@ public class UserService{
     UsersRepository usersRepository;
 
     public ServiceResult login(UserLoginDto info){
-        User user = usersRepository.findByLogin(info.login);
+        User user = usersRepository.getByLogin(info.login);
 
         if (user == null){
             return new ServiceResult(ServiceCode.BAD_REQUEST, "User doesn't exists");

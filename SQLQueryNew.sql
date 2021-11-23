@@ -1,4 +1,6 @@
-﻿INSERT INTO Publishers (publisher_name) values ('Valve'), ('Behavior'), ('Mojang');
+﻿ALTER TABLE games ADD CONSTRAINT ratingCHK check(rating like '%+');
+
+INSERT INTO Publishers (publisher_name) values ('Valve'), ('Behavior'), ('Mojang');
 
 INSERT INTO Games (publisher_id, title, rating, price, game_description) values (1, 'Dota 2', '17+', 0, 'Самая популярная игра в Steam
 Ежедневно миллионы игроков по всему миру сражаются от лица одного из более сотни героев Dota 2, и даже после тысячи часов в ней есть чему научиться. Благодаря регулярным обновлениям игра живёт своей жизнью: геймплей, возможности и герои постоянно преображаются.
@@ -37,67 +39,120 @@ SELECT * FROM users;
 -- PROCEDURES
 ------------------------------------------------------------------------------------------
 
+DROP PROCEDURE GetUserByLogin;
+DROP PROCEDURE GetPublishers;
+DROP PROCEDURE GetPublisherByName;
+DROP PROCEDURE AddPublisher;
+DROP PROCEDURE DeletePublisher;
+DROP PROCEDURE GetGames;
+DROP PROCEDURE GetGameById;
 DROP PROCEDURE GetGamesByTitleAscendingTitleContains;
+DROP PROCEDURE GetGamesByTitleDescendingTitleContains;
+DROP PROCEDURE GetGamesByPriceAscendingTitleContains;
+DROP PROCEDURE GetGamesByPriceDescendingTitleContains;
+DROP PROCEDURE GetGamesByTitleAscending;
+DROP PROCEDURE GetGamesByTitleDescending;
+DROP PROCEDURE GetGamesByPriceAscending;
+DROP PROCEDURE GetGamesByPriceDescending;
+DROP PROCEDURE DeleteGame;
+DROP PROCEDURE AddGame;
+DROP PROCEDURE UpdateGameInfo;
+
+------------------------------------------------------------------------------------------
+-- Users
+------------------------------------------------------------------------------------------
+
+go
+CREATE PROCEDURE GetUserByLogin @login varchar(255) as
+	SELECT * FROM users WHERE login = @login;
+go
+
+------------------------------------------------------------------------------------------
+-- Users
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+-- Publishers
+------------------------------------------------------------------------------------------
+
+go
+CREATE PROCEDURE GetPublishers as
+	SELECT * FROM publishers;
+go
+
+go
+CREATE PROCEDURE GetPublisherByName @name varchar(255) as
+	SELECT * FROM publishers WHERE publisher_name = @name;
+go
+
+go
+CREATE PROCEDURE AddPublisher @name varchar(255) as
+	INSERT INTO publishers (publisher_name) values (@name);
+go
+
+go
+CREATE PROCEDURE DeletePublisher @id int as
+	DELETE FROM publishers WHERE id = @id;
+go
+
+------------------------------------------------------------------------------------------
+-- Publishers
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+-- Games
+------------------------------------------------------------------------------------------
+
+go
+CREATE PROCEDURE GetGames as
+	SELECT * FROM games;
+go
+
+go
+CREATE PROCEDURE GetGameById @id int as
+	SELECT * FROM games where id = @id;
+go
 
 go
 CREATE PROCEDURE GetGamesByTitleAscendingTitleContains @contain varchar as
 	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY title asc;
 go
 
-DROP PROCEDURE GetGamesByTitleDescendingTitleContains;
-
 go
 CREATE PROCEDURE GetGamesByTitleDescendingTitleContains @contain varchar as
 	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY title desc;
 go
-
-DROP PROCEDURE GetGamesByPriceAscendingTitleContains;
 
 go
 CREATE PROCEDURE GetGamesByPriceAscendingTitleContains @contain varchar as
 	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY price asc;
 go
 
-DROP PROCEDURE GetGamesByPriceDescendingTitleContains;
-
 go
 CREATE PROCEDURE GetGamesByPriceDescendingTitleContains @contain varchar as
 	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY price desc;
 go
-
----------------------
-
-DROP PROCEDURE GetGamesByTitleAscending;
 
 go
 CREATE PROCEDURE GetGamesByTitleAscending as
 	SELECT * FROM games ORDER BY title asc;
 go
 
-DROP PROCEDURE GetGamesByTitleDescending;
-
 go
 CREATE PROCEDURE GetGamesByTitleDescending as
 	SELECT * FROM games ORDER BY title desc;
 go
 
-DROP PROCEDURE GetGamesByPriceAscending;
 
 go
 CREATE PROCEDURE GetGamesByPriceAscending as
 	SELECT * FROM games ORDER BY price asc;
 go
 
-DROP PROCEDURE GetGamesByPriceDescending;
-
 go
 CREATE PROCEDURE GetGamesByPriceDescending as
 	SELECT * FROM games ORDER BY price desc;
 go
-
-exec GetGamesByPriceAscending;
-
-DROP PROCEDURE DeleteGame;
 
 go
 CREATE PROCEDURE DeleteGame @gameId int as 
@@ -107,8 +162,6 @@ begin
 end;
 go
 
-DROP PROCEDURE AddGame;
-
 go
 CREATE PROCEDURE AddGame @publisher_id int, @title varchar(255), @rating varchar(3), @price float, @game_description varchar(4000) as
 begin
@@ -116,11 +169,13 @@ begin
 end;
 go
 
-DROP PROCEDURE UpdateGameInfo;
-
 go
 CREATE PROCEDURE UpdateGameInfo @id int, @publisher_id int, @title varchar(255), @rating varchar(3), @price float, @game_description varchar(4000) as
 begin
 	UPDATE games SET publisher_id = @publisher_id, title = @title, rating = @rating, price = @price, game_description = @game_description where id = @id;
 end;
 go
+
+------------------------------------------------------------------------------------------
+-- Games
+------------------------------------------------------------------------------------------

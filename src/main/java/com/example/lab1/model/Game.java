@@ -18,6 +18,7 @@ import java.util.Set;
 public class Game {
     @NotBlank
     @NotNull
+    @Column(unique = true)
     private String title;
 
     @OneToOne(cascade = CascadeType.ALL)

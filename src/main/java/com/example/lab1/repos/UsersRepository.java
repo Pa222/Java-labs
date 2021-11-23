@@ -9,5 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface UsersRepository  extends CrudRepository<User, Long> {
 
-    User findByLogin(String Login);
+    @Query(value = "exec GetUserByLogin :login", nativeQuery = true)
+    User getByLogin(@Param("login") String Login);
 }

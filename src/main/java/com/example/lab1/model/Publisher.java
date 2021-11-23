@@ -20,6 +20,7 @@ public class Publisher {
 
     @NotBlank
     @NotNull
+    @Column(unique = true)
     private String publisherName;
 
     public Publisher(String publisherName){

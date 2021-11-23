@@ -30,7 +30,6 @@ public class BasketController {
     private ModelAndView GetBasket(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("Basket");
-        model.addAttribute("User", usersRepository.findByLogin("pa2"));
         return modelAndView;
     }
 }

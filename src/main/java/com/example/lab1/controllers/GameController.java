@@ -42,7 +42,7 @@ public class GameController {
     public ModelAndView showAddGamePage(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addgame");
-        model.addAttribute("Publishers", publisherRepository.findAll());
+        model.addAttribute("Publishers", publisherRepository.getPublishers());
         return modelAndView;
     }
 
@@ -56,7 +56,7 @@ public class GameController {
 
         if (result.hasErrors()){
             model.addAttribute("message", allFieldsAreRequiredMessage);
-            model.addAttribute("Publishers", publisherRepository.findAll());
+            model.addAttribute("Publishers", publisherRepository.getPublishers());
             return modelAndView;
         }
 
@@ -64,12 +64,12 @@ public class GameController {
 
         if (serviceResult.id == ServiceCode.BAD_REQUEST){
             model.addAttribute("message", serviceResult.message);
-            model.addAttribute("Publishers", publisherRepository.findAll());
+            model.addAttribute("Publishers", publisherRepository.getPublishers());
             return modelAndView;
         }
 
         model.addAttribute("message", "Game successfully added");
-        model.addAttribute("Publishers", publisherRepository.findAll());
+        model.addAttribute("Publishers", publisherRepository.getPublishers());
 
         return modelAndView;
     }
@@ -117,7 +117,7 @@ public class GameController {
         if (result.hasErrors()){
             modelAndView.setViewName("editgame");
             model.addAttribute("message", allFieldsAreRequiredMessage);
-            model.addAttribute("Publishers", publisherRepository.findAll());
+            model.addAttribute("Publishers", publisherRepository.getPublishers());
 
             return modelAndView;
         }
@@ -127,7 +127,7 @@ public class GameController {
         if (serviceresult.id == ServiceCode.BAD_REQUEST){
             modelAndView.setViewName("editgame");
             model.addAttribute("message", serviceresult.message);
-            model.addAttribute("Publishers", publisherRepository.findAll());
+            model.addAttribute("Publishers", publisherRepository.getPublishers());
 
             return modelAndView;
         }
