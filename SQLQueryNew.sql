@@ -26,8 +26,41 @@ CS:GO включает в себя новые карты, персонажей, 
 «Counter-Strike удивила всю игровую индустрию, когда ничем не примечательная модификация стала одним из самых популярных шутеров в мире почти сразу после выпуска в августе 1999 года, — говорит Даг Ломбарди из Valve. — Уже на протяжении 12 лет она продолжает быть одной из самых популярных игр в мире и возглавляет киберспортивные соревнования, а по всему миру продано более 25 миллионов игр этой серии. CS:GO обещает расширить границы заслужившего известность игрового процесса и предложить его игрокам не только на ПК, но и на консолях следующего поколения и компьютерах Mac».'),
 												(3, 'Minecraft', '7+', 23.95, 'Minecraft (рус. Майнкрáфт; от англ. mine — «шахта; добывать» + craft — «ремесло») — компьютерная инди-игра в жанре песочницы, созданная шведским программистом Маркусом Перссоном и выпущенная его компанией Mojang AB. Перссон опубликовал начальную версию игры в 2009 году; в конце 2011 года была выпущена стабильная версия для ПК Microsoft Windows, распространявшаяся через официальный сайт. В последующие годы Minecraft была портирована на Linux и macOS для персональных компьютеров; на Android, iOS и Windows Phone для мобильных устройств; на игровые приставки PlayStation 4, Vita, VR, Xbox One, Nintendo 3DS, Switch и Wii U. В 2014 году корпорация Microsoft приобрела права на Minecraft вместе с компанией Mojang AB за 2,5 миллиарда $. Студия 4J портировала игру на игровые приставки, а Xbox Game Studios разработала мультиплатформенную версию Minecraft и специальное издание игры для образовательных учреждений');
 
+
 SELECT * FROM publishers;
-SELECT * FROM Games;
+SELECT * FROM games;
 SELECT * FROM user_order;
 SELECT * FROM order_games;
-SELECT * FROM Users;
+SELECT * FROM users;
+
+------------------------------------------------------------------------------------------
+-- PROCEDURES
+------------------------------------------------------------------------------------------
+
+DROP PROCEDURE DeleteGame;
+
+go
+CREATE PROCEDURE DeleteGame @gameId int as 
+begin
+	DELETE FROM order_games WHERE game_id = @gameId;
+	DELETE FROM games WHERE id = @gameId;
+end;
+go
+
+DROP PROCEDURE AddGame;
+
+go
+CREATE PROCEDURE AddGame @publisher_id int, @title varchar, @rating varchar, @price float, @game_description varchar as
+begin
+	INSERT INTO games (publisher_id, title, rating, price, game_description) values (@publisher_id, @title, @rating, @price, @game_description);
+end;
+go
+
+DROP PROCEDURE UpdateGameInfo;
+
+go
+CREATE PROCEDURE UpdateGameInfo @id int, @publisher_id int, @title varchar, @rating varchar, @price float, @game_description varchar as
+begin
+	UPDATE games SET publisher_id = @publisher_id, title = @title, rating = @rating, price = @price, game_description = @game_description where id = @id;
+end;
+go
