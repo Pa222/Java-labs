@@ -3,11 +3,15 @@ package com.example.lab1.controllers;
 import com.example.lab1.Filters;
 import com.example.lab1.model.Game;
 import com.example.lab1.repos.GamesRepository;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -15,13 +19,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 
-@Controller
+@RestController
 public class CatalogController {
 
     @Autowired
     GamesRepository gamesRepository;
 
     @GetMapping(value = "/catalog")
+    @Operation(description = "Filters data got from database and sends a response to client",
+            summary = "Returns view with games list got from db")
     public ModelAndView catalog(Model model, @ModelAttribute("filters") Filters filters){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("gameslist");
