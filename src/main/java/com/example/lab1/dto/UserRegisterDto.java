@@ -16,4 +16,7 @@ public class UserRegisterDto {
     @NotBlank
     @NotNull
     public String repeatPassword;
+    @NotBlank
+    @NotNull
+    public String name;
 }

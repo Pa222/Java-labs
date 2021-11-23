@@ -22,6 +22,13 @@ public class User {
     @NotNull
     private String password;
 
+    @NotNull
+    private byte[] salt;
+
+    @NotBlank
+    @NotNull
+    private String Name;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

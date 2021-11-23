@@ -10,9 +10,4 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UsersRepository  extends CrudRepository<User, Long> {
 
     User findByLogin(String Login);
-
-    @Modifying
-    @Transactional
-    @Query(value = "insert into Users (login, password) values (:login, :password)", nativeQuery = true)
-    void addNewUser(@Param("login") String login, @Param("password") String password);
 }
