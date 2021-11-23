@@ -13,19 +13,6 @@ public interface GamesRepository extends CrudRepository<Game, Long>{
     @Procedure(value = "AddGame")
     void addNewGame(Long publisher_id, String title, String rating, float price, String game_description);
 
-//    @Modifying
-//    @Query(value = "update Games set publisher_id = :publisher, title = :title, rating = :rating, " +
-//            " price = :price, game_description = :gameDescription where id = :id", nativeQuery = true)
-//    @Transactional
-//    void updateGame(
-//                    @Param("id") Long id,
-//                    @Param("publisher") Long publisher,
-//                    @Param("title") String title,
-//                    @Param("rating") String rating,
-//                    @Param("price") float price,
-//                    @Param("gameDescription") String gameDescription
-//    );
-
     @Procedure(value = "UpdateGameInfo")
     void updateGame(Long id, Long publisher_id, String title, String rating, float price, String game_description);
 

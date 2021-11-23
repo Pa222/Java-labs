@@ -110,7 +110,7 @@ go
 DROP PROCEDURE AddGame;
 
 go
-CREATE PROCEDURE AddGame @publisher_id int, @title varchar, @rating varchar, @price float, @game_description varchar as
+CREATE PROCEDURE AddGame @publisher_id int, @title varchar(255), @rating varchar(3), @price float, @game_description varchar(4000) as
 begin
 	INSERT INTO games (publisher_id, title, rating, price, game_description) values (@publisher_id, @title, @rating, @price, @game_description);
 end;
@@ -119,7 +119,7 @@ go
 DROP PROCEDURE UpdateGameInfo;
 
 go
-CREATE PROCEDURE UpdateGameInfo @id int, @publisher_id int, @title varchar, @rating varchar, @price float, @game_description varchar as
+CREATE PROCEDURE UpdateGameInfo @id int, @publisher_id int, @title varchar(255), @rating varchar(3), @price float, @game_description varchar(4000) as
 begin
 	UPDATE games SET publisher_id = @publisher_id, title = @title, rating = @rating, price = @price, game_description = @game_description where id = @id;
 end;

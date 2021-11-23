@@ -21,7 +21,7 @@ public class GameService {
     @Autowired
     PublisherRepository publisherRepository;
 
-    private final Pattern _pattern = Pattern.compile("\\d{2}\\+");
+    private final Pattern _pattern = Pattern.compile("\\d{2}\\+|\\d\\+");
 
     public Game getGameById(Long id) { return gamesRepository.findById(id).get(); }
 
