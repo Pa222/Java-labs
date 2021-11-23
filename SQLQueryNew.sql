@@ -37,6 +37,66 @@ SELECT * FROM users;
 -- PROCEDURES
 ------------------------------------------------------------------------------------------
 
+DROP PROCEDURE GetGamesByTitleAscendingTitleContains;
+
+go
+CREATE PROCEDURE GetGamesByTitleAscendingTitleContains @contain varchar as
+	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY title asc;
+go
+
+DROP PROCEDURE GetGamesByTitleDescendingTitleContains;
+
+go
+CREATE PROCEDURE GetGamesByTitleDescendingTitleContains @contain varchar as
+	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY title desc;
+go
+
+DROP PROCEDURE GetGamesByPriceAscendingTitleContains;
+
+go
+CREATE PROCEDURE GetGamesByPriceAscendingTitleContains @contain varchar as
+	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY price asc;
+go
+
+DROP PROCEDURE GetGamesByPriceDescendingTitleContains;
+
+go
+CREATE PROCEDURE GetGamesByPriceDescendingTitleContains @contain varchar as
+	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY price desc;
+go
+
+---------------------
+
+DROP PROCEDURE GetGamesByTitleAscending;
+
+go
+CREATE PROCEDURE GetGamesByTitleAscending as
+	SELECT * FROM games ORDER BY title asc;
+go
+
+DROP PROCEDURE GetGamesByTitleDescending;
+
+go
+CREATE PROCEDURE GetGamesByTitleDescending as
+	SELECT * FROM games ORDER BY title desc;
+go
+
+DROP PROCEDURE GetGamesByPriceAscending;
+
+go
+CREATE PROCEDURE GetGamesByPriceAscending as
+	SELECT * FROM games ORDER BY price asc;
+go
+
+DROP PROCEDURE GetGamesByPriceDescending;
+
+go
+CREATE PROCEDURE GetGamesByPriceDescending as
+	SELECT * FROM games ORDER BY price desc;
+go
+
+exec GetGamesByPriceAscending;
+
 DROP PROCEDURE DeleteGame;
 
 go

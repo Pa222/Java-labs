@@ -32,20 +32,27 @@ public interface GamesRepository extends CrudRepository<Game, Long>{
     @Procedure(value = "DeleteGame")
     void deleteGame(Long gameId);
 
-    @Query(value = "select * from Games order by price asc", nativeQuery = true)
-    Iterable<Game> findAllSortedByPriceAscending();
+    @Query(value = "exec GetGamesByPriceAscending", nativeQuery = true)
+    Iterable<Game> getGamesByPriceAscending();
 
-    @Query(value = "select * from Games order by price desc", nativeQuery = true)
-    Iterable<Game> findAllSortedByPriceDescending();
+    @Query(value = "exec GetGamesByPriceDescending", nativeQuery = true)
+    Iterable<Game> getGamesByPriceDescending();
 
-    @Query(value = "select * from Games order by title asc", nativeQuery = true)
-    Iterable<Game> findAllSortedByTitleAscending();
+    @Query(value = "exec GetGamesByTitleAscending", nativeQuery = true)
+    Iterable<Game> getGamesByTitleAscending();
 
-    @Query(value = "select * from Games order by title desc", nativeQuery = true)
-    Iterable<Game> findAllSortedByTitleDescending();
+    @Query(value = "exec GetGamesByTitleDescending", nativeQuery = true)
+    Iterable<Game> getGamesByTitleDescending();
 
-    Iterable<Game> findAllByTitleContainsOrderByPriceAsc(String title);
-    Iterable<Game> findAllByTitleContainsOrderByPriceDesc(String title);
-    Iterable<Game> findAllByTitleContainsOrderByTitleAsc(String title);
-    Iterable<Game> findAllByTitleContainsOrderByTitleDesc(String title);
+    @Query(value = "exec GetGamesByPriceAscendingTitleContains :contain", nativeQuery = true)
+    Iterable<Game> getGamesByPriceAscendingTitleContains(@Param("contain") String contain);
+
+    @Query(value = "exec GetGamesByPriceDescendingTitleContains :contain", nativeQuery = true)
+    Iterable<Game> getGamesByPriceDescendingTitleContains(@Param("contain") String contain);
+
+    @Query(value = "exec GetGamesByTitleAscendingTitleContains :contain", nativeQuery = true)
+    Iterable<Game> getGamesByTitleAscendingTitleContains(@Param("contain") String contain);
+
+    @Query(value = "exec GetGamesByTitleDescendingTitleContains :contain", nativeQuery = true)
+    Iterable<Game> getGamesByTitleDescendingTitleContains(@Param("contain") String contain);
 }

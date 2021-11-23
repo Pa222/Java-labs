@@ -38,19 +38,19 @@ public class CatalogController {
         if (Objects.equals(filters.getSearchBox(), "")){
             switch(filters.getSort()){
                 case "priceAsc":{
-                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.findAllSortedByPriceAscending());
+                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.getGamesByPriceAscending());
                     break;
                 }
                 case "priceDesc":{
-                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.findAllSortedByPriceDescending());
+                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.getGamesByPriceDescending());
                     break;
                 }
                 case "TitleAsc":{
-                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.findAllSortedByTitleAscending());
+                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.getGamesByTitleAscending());
                     break;
                 }
                 case "TitleDesc":{
-                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.findAllSortedByTitleDescending());
+                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.getGamesByTitleDescending());
                     break;
                 }
             }
@@ -58,19 +58,19 @@ public class CatalogController {
         else {
             switch(filters.getSort()){
                 case "priceAsc":{
-                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.findAllByTitleContainsOrderByPriceAsc(filters.getSearchBox()));
+                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.getGamesByPriceAscendingTitleContains(filters.getSearchBox()));
                     break;
                 }
                 case "priceDesc":{
-                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.findAllByTitleContainsOrderByPriceDesc(filters.getSearchBox()));
+                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.getGamesByPriceDescendingTitleContains(filters.getSearchBox()));
                     break;
                 }
                 case "TitleAsc":{
-                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.findAllByTitleContainsOrderByTitleAsc(filters.getSearchBox()));
+                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.getGamesByTitleAscendingTitleContains(filters.getSearchBox()));
                     break;
                 }
                 case "TitleDesc":{
-                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.findAllByTitleContainsOrderByTitleDesc(filters.getSearchBox()));
+                    searchCollection.addAll((Collection<? extends Game>) gamesRepository.getGamesByTitleDescendingTitleContains(filters.getSearchBox()));
                     break;
                 }
             }
