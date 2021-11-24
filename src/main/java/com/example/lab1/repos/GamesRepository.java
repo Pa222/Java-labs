@@ -25,6 +25,12 @@ public interface GamesRepository extends CrudRepository<Game, Long>{
     @Query(value = "exec GetGames", nativeQuery = true)
     Iterable<Game> getGames();
 
+    @Query(value = "exec GetGamesCount", nativeQuery = true)
+    int getGamesCount();
+
+    @Query(value = "exec GetGamesByTitleCount :title", nativeQuery = true)
+    int getGamesByTitleCount(@Param("title") String title);
+
     @Query(value = "exec GetGameById :id", nativeQuery = true)
     Game getGameById(@Param("id") Long id);
 }

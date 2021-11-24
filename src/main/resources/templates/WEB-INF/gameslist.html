@@ -43,6 +43,12 @@
                         <option th:value="priceDesc">Цена: убывание</option>
                     </select>
                 </div>
+                <div>
+                    <label>Номер страницы: </label>
+                    <select class="catalog__pages" onchange="this.form.submit()" th:field="*{pageNumber}">
+                        <option th:each="i: ${#numbers.sequence(1, pagesAmount)}" th:value="${i}">[[${i}]]</option>
+                    </select>
+                </div>
             </div>
         </form>
         <div class="catalog__items" th:each ="game : ${games}">
@@ -54,7 +60,6 @@
                 <input class="catalog__basket-button" type="button" value="В корзину">
             </div>
         </div>
-    </div>
 </div>
 </body>
 </html>

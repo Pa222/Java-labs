@@ -62,9 +62,6 @@ public class GameService {
         return new ServiceResult(ServiceCode.OK, "Game successfully deleted");
     }
 
-    public Iterable<Game> getGames(){
-        return gamesRepository.getGames();
-    }
 
     public ArrayList<Game> getGamesByPageNumber(int page, int size, String title){
         if (title == null){
@@ -72,4 +69,14 @@ public class GameService {
         }
         return (ArrayList<Game>) gamesRepository.getGamesByPageNumber(page, size, title);
     }
+
+    public Iterable<Game> getGames(){
+        return gamesRepository.getGames();
+    }
+
+    public int getGamesCount(){
+        return gamesRepository.getGamesCount();
+    }
+
+    public int getGamesByTitleCount(String title) {return gamesRepository.getGamesByTitleCount(title);}
 }

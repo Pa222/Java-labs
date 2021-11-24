@@ -1,6 +1,7 @@
 package com.example.lab1.controllers;
 
 import com.example.lab1.Filters;
+import com.example.lab1.PageNumberForm;
 import com.example.lab1.model.Game;
 import com.example.lab1.repos.GamesRepository;
 import com.example.lab1.services.GameService;
@@ -32,48 +33,48 @@ public class CatalogController {
 
         ArrayList<Game> result = new ArrayList<>();
         ArrayList<Game> games;
+        int pagesAmount = 1;
 
-        if (filters.getSearchBox().isEmpty()){
-            games = gameService.getGamesByPageNumber(1, 3, null);
-        } else {
-            games = gameService.getGamesByPageNumber(1, 3, filters.getSearchBox());
+        if (filters.getSearchBox().isEmpty()) {
+            pagesAmount = Math.round((float) gameService.getGamesCount() / 8);
+            games = gameService.getGamesByPageNumber(filters.getPageNumber(), 8, null);
+        } else{
+            pagesAmount = Math.round((float) gameService.getGamesByTitleCount(filters.getSearchBox()) / 8);
+            games = gameService.getGamesByPageNumber(filters.getPageNumber(), 8, filters.getSearchBox());
         }
 
-        if (Objects.equals(filters.getSearchBox(), "")){
-            switch(filters.getSort()){
-                case "priceAsc":{
-                    games.sort(Game.PRICE_ASCENDING_COMPARATOR);
-                    break;
-                }
-                case "priceDesc":{
-                    games.sort(Game.PRICE_DESCENDING_COMPARATOR);
-                    break;
-                }
-                case "TitleAsc":{
-                    games.sort(Game.TITLE_ASCENDING_COMPARATOR);
-                    break;
-                }
-                case "TitleDesc":{
-                    games.sort(Game.TITLE_DESCENDING_COMPARATOR);
-                    break;
-                }
+        switch (filters.getSort()) {
+            case "priceAsc": {
+                games.sort(Game.PRICE_ASCENDING_COMPARATOR);
+                break;
+            }
+            case "priceDesc": {
+                games.sort(Game.PRICE_DESCENDING_COMPARATOR);
+                break;
+            }
+            case "TitleAsc": {
+                games.sort(Game.TITLE_ASCENDING_COMPARATOR);
+                break;
+            }
+            case "TitleDesc": {
+                games.sort(Game.TITLE_DESCENDING_COMPARATOR);
+                break;
             }
         }
 
-        for (Game game : games){
+        for (Game game : games) {
             if (
                     (!filters.isRating18() && Objects.equals(game.getRating(), "18+")) ||
-                    (game.getPrice() < filters.getPriceFrom() || game.getPrice() > filters.getPriceTo())
-            ){
+                            (game.getPrice() < filters.getPriceFrom() || game.getPrice() > filters.getPriceTo())
+            ) {
                 continue;
             }
             result.add(game);
         }
 
-
-
         model.addAttribute("filters", filters);
         model.addAttribute("games", result);
+        model.addAttribute("pagesAmount", pagesAmount);
 
         return modelAndView;
     }
