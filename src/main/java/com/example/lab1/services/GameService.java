@@ -10,6 +10,7 @@ import com.example.lab1.repos.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,5 +64,12 @@ public class GameService {
 
     public Iterable<Game> getGames(){
         return gamesRepository.getGames();
+    }
+
+    public ArrayList<Game> getGamesByPageNumber(int page, int size, String title){
+        if (title == null){
+            return (ArrayList<Game>) gamesRepository.getGamesByPageNumber(page, size, null);
+        }
+        return (ArrayList<Game>) gamesRepository.getGamesByPageNumber(page, size, title);
     }
 }

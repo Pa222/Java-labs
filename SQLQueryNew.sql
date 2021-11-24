@@ -45,15 +45,8 @@ DROP PROCEDURE GetPublisherByName;
 DROP PROCEDURE AddPublisher;
 DROP PROCEDURE DeletePublisher;
 DROP PROCEDURE GetGames;
+DROP PROCEDURE GetGamesByPageNumber;
 DROP PROCEDURE GetGameById;
-DROP PROCEDURE GetGamesByTitleAscendingTitleContains;
-DROP PROCEDURE GetGamesByTitleDescendingTitleContains;
-DROP PROCEDURE GetGamesByPriceAscendingTitleContains;
-DROP PROCEDURE GetGamesByPriceDescendingTitleContains;
-DROP PROCEDURE GetGamesByTitleAscending;
-DROP PROCEDURE GetGamesByTitleDescending;
-DROP PROCEDURE GetGamesByPriceAscending;
-DROP PROCEDURE GetGamesByPriceDescending;
 DROP PROCEDURE DeleteGame;
 DROP PROCEDURE AddGame;
 DROP PROCEDURE UpdateGameInfo;
@@ -114,44 +107,21 @@ CREATE PROCEDURE GetGameById @id int as
 go
 
 go
-CREATE PROCEDURE GetGamesByTitleAscendingTitleContains @contain varchar as
-	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY title asc;
-go
-
-go
-CREATE PROCEDURE GetGamesByTitleDescendingTitleContains @contain varchar as
-	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY title desc;
-go
-
-go
-CREATE PROCEDURE GetGamesByPriceAscendingTitleContains @contain varchar as
-	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY price asc;
-go
-
-go
-CREATE PROCEDURE GetGamesByPriceDescendingTitleContains @contain varchar as
-	SELECT * FROM games WHERE title like '%' + @contain + '%' ORDER BY price desc;
-go
-
-go
-CREATE PROCEDURE GetGamesByTitleAscending as
-	SELECT * FROM games ORDER BY title asc;
-go
-
-go
-CREATE PROCEDURE GetGamesByTitleDescending as
-	SELECT * FROM games ORDER BY title desc;
-go
-
-
-go
-CREATE PROCEDURE GetGamesByPriceAscending as
-	SELECT * FROM games ORDER BY price asc;
-go
-
-go
-CREATE PROCEDURE GetGamesByPriceDescending as
-	SELECT * FROM games ORDER BY price desc;
+CREATE PROCEDURE GetGamesByPageNumber @page_number int, @page_size int, @title varchar(255) = null as
+	declare @start_point int = 0;
+	declare @end_point int = 0;
+	set @start_point = ((@page_number - 1) * @page_size) + 1;
+	set @end_point = @start_point + @page_size - 1;
+	if (@title is null)
+		SELECT *
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY (select NULL as noorder)) AS RowNum, *
+			  FROM games) as alias
+		WHERE RowNum BETWEEN @start_point AND @end_point;
+	else
+		SELECT *
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY (select NULL as noorder)) AS RowNum, *
+			  FROM games) as alias
+		WHERE RowNum BETWEEN @start_point AND @end_point AND title like '%' + @title + '%';
 go
 
 go

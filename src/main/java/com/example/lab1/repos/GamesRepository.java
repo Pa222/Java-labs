@@ -19,33 +19,12 @@ public interface GamesRepository extends CrudRepository<Game, Long>{
     @Procedure(value = "DeleteGame")
     void deleteGame(Long gameId);
 
+    @Query(value = "exec GetGamesByPageNumber :page, :size, :title", nativeQuery = true)
+    Iterable<Game> getGamesByPageNumber(@Param("page") int page, @Param("size") int size, @Param("title") String title);
+
     @Query(value = "exec GetGames", nativeQuery = true)
     Iterable<Game> getGames();
 
     @Query(value = "exec GetGameById :id", nativeQuery = true)
     Game getGameById(@Param("id") Long id);
-
-    @Query(value = "exec GetGamesByPriceAscending", nativeQuery = true)
-    Iterable<Game> getGamesByPriceAscending();
-
-    @Query(value = "exec GetGamesByPriceDescending", nativeQuery = true)
-    Iterable<Game> getGamesByPriceDescending();
-
-    @Query(value = "exec GetGamesByTitleAscending", nativeQuery = true)
-    Iterable<Game> getGamesByTitleAscending();
-
-    @Query(value = "exec GetGamesByTitleDescending", nativeQuery = true)
-    Iterable<Game> getGamesByTitleDescending();
-
-    @Query(value = "exec GetGamesByPriceAscendingTitleContains :contain", nativeQuery = true)
-    Iterable<Game> getGamesByPriceAscendingTitleContains(@Param("contain") String contain);
-
-    @Query(value = "exec GetGamesByPriceDescendingTitleContains :contain", nativeQuery = true)
-    Iterable<Game> getGamesByPriceDescendingTitleContains(@Param("contain") String contain);
-
-    @Query(value = "exec GetGamesByTitleAscendingTitleContains :contain", nativeQuery = true)
-    Iterable<Game> getGamesByTitleAscendingTitleContains(@Param("contain") String contain);
-
-    @Query(value = "exec GetGamesByTitleDescendingTitleContains :contain", nativeQuery = true)
-    Iterable<Game> getGamesByTitleDescendingTitleContains(@Param("contain") String contain);
 }

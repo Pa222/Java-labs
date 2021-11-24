@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.text.Collator;
+import java.util.Comparator;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +16,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="Users")
 public class User {
+
     @NotBlank
     @NotNull
     private String login;
