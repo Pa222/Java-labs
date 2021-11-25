@@ -49,9 +49,13 @@ SELECT * FROM users;
 
 DROP PROCEDURE GetUserByLogin;
 DROP PROCEDURE GetPublishers;
+DROP PROCEDURE GetPublishersByPageNumber;
 DROP PROCEDURE GetPublisherByName;
+DROP PROCEDURE GetPublisherById;
+DROP PROCEDURE GetPublishersCount;
 DROP PROCEDURE AddPublisher;
 DROP PROCEDURE DeletePublisher;
+DROP PROCEDURE EditPublisher;
 DROP PROCEDURE GetGames;
 DROP PROCEDURE GetGamesCount;
 DROP PROCEDURE GetGamesByTitleCount;
@@ -84,8 +88,30 @@ CREATE PROCEDURE GetPublishers as
 go
 
 go
+CREATE PROCEDURE GetPublishersByPageNumber @page_number int, @page_size int as
+	declare @start_point int = 0;
+	declare @end_point int = 0;
+	set @start_point = ((@page_number - 1) * @page_size) + 1;
+	set @end_point = @start_point + @page_size - 1;
+	SELECT *
+	FROM (SELECT ROW_NUMBER() OVER(ORDER BY (select NULL as noorder)) AS RowNum, *
+			FROM publishers) as alias
+	WHERE RowNum BETWEEN @start_point AND @end_point;
+go
+
+go
 CREATE PROCEDURE GetPublisherByName @name varchar(255) as
 	SELECT * FROM publishers WHERE publisher_name = @name;
+go
+
+go
+CREATE PROCEDURE GetPublisherById @id int as
+	SELECT * FROM publishers WHERE id = @id;
+go
+
+go
+CREATE PROCEDURE GetPublishersCount as
+	SELECT COUNT(*) FROM publishers;
 go
 
 go
@@ -96,6 +122,11 @@ go
 go
 CREATE PROCEDURE DeletePublisher @id int as
 	DELETE FROM publishers WHERE id = @id;
+go
+
+go
+CREATE PROCEDURE EditPublisher @id int, @name varchar(255) as
+	UPDATE publishers set publisher_name = @name WHERE id = @id;
 go
 
 ------------------------------------------------------------------------------------------

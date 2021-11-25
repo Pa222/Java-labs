@@ -75,7 +75,7 @@ public class GameController {
     }
 
     @GetMapping(value = {"editgames"})
-    public ModelAndView delete(Model model, @ModelAttribute("filters") Filters filters){
+    public ModelAndView edit(Model model, @ModelAttribute("filters") Filters filters){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editGames");
 
@@ -88,14 +88,19 @@ public class GameController {
 
     //Удаление
     @PostMapping(value = {"/deletegame"})
-    public ModelAndView deleteGame(Model model, @ModelAttribute("Game") GameDeleteDto game){
+    public ModelAndView deleteGame(Model model, @ModelAttribute("Game") GameDeleteDto game, @ModelAttribute("filters") Filters filters){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editGames");
 
         ServiceResult result = gameService.deleteGame(game);
 
-        model.addAttribute("games", gameService.getGames());
+        int pagesAmount = Math.round((float)gameService.getGamesCount() / 8);
+
+
+        model.addAttribute("games", gameService.getGamesByPageNumber(filters.getPageNumber(), 20, null));
         model.addAttribute("message", result.message);
+        model.addAttribute("pagesAmount", pagesAmount);
+
         return modelAndView;
     }
 

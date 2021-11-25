@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <title>Add Person</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/addgame.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/basket.css}"/>
 </head>
 <body>
 <div class="header">
@@ -18,8 +18,17 @@
     <a class="header__link" th:href="@{/editpublishers}">Edit Publishers</a>
 </div>
 <div class="container" th:align="center">
-    <h1>Basket</h1>
-    <div class="container">
-    </div>
+    <h1>Publisher:</h1>
+    <form th:action="@{/editpublisher}" th:object="${Publisher}" method="POST">
+        <div class="form__block">
+            <label for="publisherName">Publisher Name:</label>
+            <input class="form__input" id="publisherName" name="publisherName" type="text" th:value="*{publisherName}">
+            <input type="hidden" name="id" th:value="*{id}">
+        </div>
+        <input class ="button-main-page" type="submit" value="Edit" />
+    </form>
+</div>
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
 </div>
 </body>
