@@ -9,6 +9,7 @@ import com.example.lab1.model.Publisher;
 import com.example.lab1.repos.GamesRepository;
 import com.example.lab1.repos.PublisherRepository;
 import com.example.lab1.services.GameService;
+import com.example.lab1.services.PublisherService;
 import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ public class GameController {
     private GameService gameService;
 
     @Autowired
-    private PublisherRepository publisherRepository;
+    private PublisherService publisherService;
 
     @Value("${error.message}")
     private String allFieldsAreRequiredMessage;
@@ -42,7 +43,7 @@ public class GameController {
     public ModelAndView showAddGamePage(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addgame");
-        model.addAttribute("Publishers", publisherRepository.getPublishers());
+        model.addAttribute("Publishers", publisherService.getPublishers());
         return modelAndView;
     }
 
@@ -52,11 +53,9 @@ public class GameController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addgame");
 
-        System.out.println(game.title + ' ' + game.publisher + ' ' + game.price + ' ' + game.rating + ' ' + game.gameDescription);
-
         if (result.hasErrors()){
             model.addAttribute("message", allFieldsAreRequiredMessage);
-            model.addAttribute("Publishers", publisherRepository.getPublishers());
+            model.addAttribute("Publishers", publisherService.getPublishers());
             return modelAndView;
         }
 
@@ -64,12 +63,12 @@ public class GameController {
 
         if (serviceResult.id == ServiceCode.BAD_REQUEST){
             model.addAttribute("message", serviceResult.message);
-            model.addAttribute("Publishers", publisherRepository.getPublishers());
+            model.addAttribute("Publishers", publisherService.getPublishers());
             return modelAndView;
         }
 
         model.addAttribute("message", "Game successfully added");
-        model.addAttribute("Publishers", publisherRepository.getPublishers());
+        model.addAttribute("Publishers", publisherService.getPublishers());
 
         return modelAndView;
     }
@@ -93,11 +92,6 @@ public class GameController {
         model.addAttribute("games", gameService.getGames());
         model.addAttribute("message", result.message);
         return modelAndView;
-//        gamesRepository.deleteById(game.getId());
-//
-//        model.addAttribute("games", gameService.getGames());
-//
-//        return  "redirect:/allgames";
     }
 
     //Редактирование
@@ -105,7 +99,7 @@ public class GameController {
     public ModelAndView editGamePage(Model model, @ModelAttribute("Game") GameEditDto game){
         ModelAndView modelAndView = new ModelAndView("editgame");
         model.addAttribute("Game", gameService.getGameById(game.id));
-        model.addAttribute("Publishers", publisherRepository.findAll());
+        model.addAttribute("Publishers", publisherService.getPublishers());
         return modelAndView;
     }
 
@@ -117,7 +111,7 @@ public class GameController {
         if (result.hasErrors()){
             modelAndView.setViewName("editgame");
             model.addAttribute("message", allFieldsAreRequiredMessage);
-            model.addAttribute("Publishers", publisherRepository.getPublishers());
+            model.addAttribute("Publishers", publisherService.getPublishers());
 
             return modelAndView;
         }
@@ -127,7 +121,7 @@ public class GameController {
         if (serviceresult.id == ServiceCode.BAD_REQUEST){
             modelAndView.setViewName("editgame");
             model.addAttribute("message", serviceresult.message);
-            model.addAttribute("Publishers", publisherRepository.getPublishers());
+            model.addAttribute("Publishers", publisherService.getPublishers());
 
             return modelAndView;
         }

@@ -14,8 +14,8 @@ public interface PublisherRepository extends CrudRepository<Publisher, Long> {
     Iterable<Publisher> getPublishers();
 
     @Query(value = "exec AddPublisher :name", nativeQuery = true)
-    Iterable<Publisher> addPublisher(@Param("name") String name);
+    void addPublisher(@Param("name") String name);
 
     @Query(value = "exec DeletePublisher :id", nativeQuery = true)
-    Iterable<Publisher> deletePublisher(@Param("id") Long id);
+    void deletePublisher(@Param("id") Long id);
 }
