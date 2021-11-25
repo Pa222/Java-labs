@@ -1,4 +1,49 @@
-﻿ALTER TABLE games ADD CONSTRAINT ratingCHK check(rating like '%+');
+﻿CREATE TABLE publishers
+(
+	id int identity(1, 1),
+	publisher_name varchar(255) default('Undefined'),
+	constraint PK_publishers primary key (id)
+)
+
+CREATE TABLE games
+(
+	id int identity(1, 1),
+	game_description varchar(4000) not null,
+	price float default(0),
+	rating varchar(255) default('0+'),
+	title varchar(255) default('Undefined'),
+	publisher_id int not null,
+	constraint PK_games primary key (id),
+	foreign key (publisher_id) references publishers(id),
+	constraint ratingCHK check(rating like '%+')
+);
+
+CREATE TABLE users
+(
+	id int identity(1, 1),
+	name varchar(255),
+	login varchar(255),
+	password varchar(255),
+	salt varbinary(255),
+	constraint PK_users primary key (id)
+);
+
+CREATE TABLE user_order
+(
+	id int identity(1, 1),
+	total_amount float default(0),
+	user_id int,
+	constraint PK_user_order primary key (id),
+	foreign key (user_id) references users(id)
+);
+
+CREATE TABLE order_games
+(
+	game_id int,
+	order_id int,
+	foreign key (game_id) references games(id),
+	foreign key (order_id) references user_order(id)
+);
 
 INSERT INTO Publishers (publisher_name) values ('Valve'), ('Behavior'), ('Mojang');
 
@@ -30,7 +75,7 @@ CS:GO включает в себя новые карты, персонажей, 
 
 declare @cnt int = 0;
 
-while @cnt < 99900
+while @cnt < 100000
 	begin
 		INSERT INTO games (publisher_id, title, rating, price, game_description) values (1, concat('Test ', @cnt), '18+', 99, 'Description');
 		set @cnt = @cnt + 1;
