@@ -19,6 +19,14 @@
 </div>
 <div class="container" th:align="center">
     <h1>List of games:</h1>
+    <form th:action="@{/editgames}" th:object="${filters}" method="GET">
+        <div>
+            <label>Номер страницы: </label>
+            <select class="catalog__pages" onchange="this.form.submit()" th:field="*{pageNumber}">
+                <option th:each="i: ${#numbers.sequence(1, pagesAmount)}" th:value="${i}">[[${i}]]</option>
+            </select>
+        </div>
+    </form>
     <table th:each="game : ${games}">
         <tr>
             <td class="table__col" th:utext="${game.id}"></td>

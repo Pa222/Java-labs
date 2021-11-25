@@ -1,5 +1,6 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.Filters;
 import com.example.lab1.dto.GameDeleteDto;
 import com.example.lab1.dto.GameDto;
 import com.example.lab1.dto.GameEditDto;
@@ -74,10 +75,14 @@ public class GameController {
     }
 
     @GetMapping(value = {"editgames"})
-    public ModelAndView delete(Model model){
+    public ModelAndView delete(Model model, @ModelAttribute("filters") Filters filters){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editGames");
-        model.addAttribute("games", gameService.getGames());
+
+        int pagesAmount = Math.round((float)gameService.getGamesCount() / 8);
+
+        model.addAttribute("games", gameService.getGamesByPageNumber(filters.getPageNumber(), 20, null));
+        model.addAttribute("pagesAmount", pagesAmount);
         return modelAndView;
     }
 
