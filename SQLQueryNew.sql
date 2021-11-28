@@ -23,7 +23,8 @@ CREATE TABLE users
 	id int identity(1, 1),
 	name varchar(255),
 	login varchar(255),
-	password varchar(255)
+	password varchar(255),
+	salt varbinary(255)
 	constraint PK_users primary key (id)
 );
 

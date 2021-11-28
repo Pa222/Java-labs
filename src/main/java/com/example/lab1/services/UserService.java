@@ -4,22 +4,21 @@ import com.example.lab1.dto.UserLoginDto;
 import com.example.lab1.dto.UserRegisterDto;
 import com.example.lab1.model.User;
 import com.example.lab1.repos.UsersRepository;
-import com.example.lab1.utils.PasswordEncoder;
+import com.example.lab1.utils.Hasher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 @Service
-public class UserService{
+public class UserService implements UserDetailsService {
 
     @Autowired
     UsersRepository usersRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     public ServiceResult login(UserLoginDto info){
         User user = usersRepository.getByLogin(info.login);
@@ -28,7 +27,7 @@ public class UserService{
             return new ServiceResult(ServiceCode.BAD_REQUEST, "User doesn't exists");
         }
 
-        if (!user.getPassword().equals(info.password)){
+        if (!Hasher.isValid(info.password, Hasher.fromHex(user.getPassword()), user.getSalt())){
             return new ServiceResult(ServiceCode.BAD_REQUEST, "Password incorrect");
         }
 
@@ -36,32 +35,23 @@ public class UserService{
     }
 
     public ServiceResult register(UserRegisterDto info){
-
-        String encryptedpassword = null;
-        try
-        {
-            MessageDigest m = MessageDigest.getInstance("MD5");
-            m.update(info.password.getBytes());
-            byte[] bytes = m.digest();
-            StringBuilder s = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
-                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-
-            encryptedpassword = s.toString();
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            return new ServiceResult(ServiceCode.BAD_REQUEST, e.getMessage());
-        }
-
         User user = new User();
-        user.setLogin(info.login);
-        user.setPassword(info.password);
-        user.setName(info.name);
-        usersRepository.save(user);
-        return new ServiceResult(ServiceCode.CREATED, "User registered");
+        try{
+            byte[] salt = Hasher.getSalt();
+            byte[] hashedPassword = Hasher.getSaltedHash(info.password, salt);
+            user.setLogin(info.login);
+            user.setSalt(salt);
+            user.setPassword(Hasher.toHex(hashedPassword));
+            user.setName(info.name);
+            usersRepository.save(user);
+            return new ServiceResult(ServiceCode.CREATED, "User registered");
+        } catch (NoSuchAlgorithmException e) {
+            return new ServiceResult(ServiceCode.BAD_REQUEST, "Server error: " + e.getMessage());
+        }
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return usersRepository.getByLogin(s);
+    }
 }

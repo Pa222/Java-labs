@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
-public class AuthController {
+public class LoginController {
 
     @Autowired
     Jwt jwt;
