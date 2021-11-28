@@ -22,8 +22,8 @@
                 <a class="form__link" th:href="@{/registration}">No account? Register</a>
             </form>
         </div>
-        <div th:if="${errorMessage}" th:utext="${errorMessage}"
-             style="color:red;font-style:italic; text-align: center">
+        <div th:if="${param.error}" style="color:red;font-style:italic; text-align: center">
+            Invalid username and password.
         </div>
     </div>
 </body>

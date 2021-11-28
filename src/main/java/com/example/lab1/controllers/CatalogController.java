@@ -1,9 +1,7 @@
 package com.example.lab1.controllers;
 
 import com.example.lab1.Filters;
-import com.example.lab1.PageNumberForm;
 import com.example.lab1.model.Game;
-import com.example.lab1.repos.GamesRepository;
 import com.example.lab1.services.GameService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
 
 @RestController
@@ -24,7 +20,7 @@ public class CatalogController {
     @Autowired
     GameService gameService;
 
-    @GetMapping(value = "/catalog")
+    @GetMapping(value = {"/index", "/", "/catalog"})
     @Operation(description = "Filters data got from database and sends a response to client",
             summary = "Returns view with games list got from db")
     public ModelAndView catalog(Model model, @ModelAttribute("filters") Filters filters){

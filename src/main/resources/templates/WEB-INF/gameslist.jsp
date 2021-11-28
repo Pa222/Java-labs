@@ -11,6 +11,7 @@
 <div class="wrapper">
     <div class="header">
         <a class="header__link" th:href="@{/catalog}">Catalog</a>
+        <a class="header__link" th:href="@{/login}">Log in</a>
         <a class="header__link" th:href="@{/basket}">Basket</a>
         <a class="header__link" th:href="@{/addgame}">Add Game</a>
         <a class="header__link" th:href="@{/editgames}">Edit Games</a>

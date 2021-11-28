@@ -1,9 +1,6 @@
 package com.example.lab1.controllers;
 
-import com.example.lab1.UserContext;
-import com.example.lab1.dto.UserLoginDto;
 import com.example.lab1.dto.UserRegisterDto;
-import com.example.lab1.model.User;
 import com.example.lab1.repos.UsersRepository;
 import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.Objects;
 
 @Controller
 public class RegistrationController {
@@ -32,7 +28,7 @@ public class RegistrationController {
     @GetMapping("/registration")
     private ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Register");
+        modelAndView.setViewName("Register.jsp");
         return modelAndView;
     }
 
