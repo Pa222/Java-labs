@@ -21,36 +21,13 @@ import javax.validation.Valid;
 import java.util.Objects;
 
 @Controller
-public class LoginController {
+public class RegistrationController {
 
     @Autowired
     UsersRepository usersRepository;
 
     @Autowired
     UserService userService;
-
-//    @GetMapping("/login")
-//    private ModelAndView loginPage(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("Log in");
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/login")
-//    private ModelAndView login(Model model, @ModelAttribute("User") UserLoginDto user){
-//        ModelAndView modelAndView = new ModelAndView();
-//
-//        ServiceResult serviceResult = userService.login(user);
-//
-//        if (serviceResult.id == ServiceCode.BAD_REQUEST){
-//            model.addAttribute("errorMessage", serviceResult.message);
-//            modelAndView.setViewName("Log In");
-//            return modelAndView;
-//        }
-//
-//        modelAndView.setViewName("redirect:/index");
-//        return modelAndView;
-//    }
 
     @GetMapping("/registration")
     private ModelAndView registration(){
