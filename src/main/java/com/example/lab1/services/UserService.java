@@ -8,6 +8,8 @@ import com.example.lab1.utils.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 @Service
@@ -34,9 +36,26 @@ public class UserService{
     }
 
     public ServiceResult register(UserRegisterDto info){
-        if (!Objects.equals(info.password, info.repeatPassword)){
-            return new ServiceResult(ServiceCode.BAD_REQUEST, "Passwords must match");
+
+        String encryptedpassword = null;
+        try
+        {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(info.password.getBytes());
+            byte[] bytes = m.digest();
+            StringBuilder s = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            encryptedpassword = s.toString();
         }
+        catch (NoSuchAlgorithmException e)
+        {
+            return new ServiceResult(ServiceCode.BAD_REQUEST, e.getMessage());
+        }
+
         User user = new User();
         user.setLogin(info.login);
         user.setPassword(info.password);

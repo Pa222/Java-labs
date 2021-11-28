@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = {"/api/deletegame"})
+    @DeleteMapping(value = {"/api/deletegame"})
     public ResponseEntity deleteGame(@RequestBody GameDeleteDto game){
         ServiceResult result = gameService.deleteGame(game);
 

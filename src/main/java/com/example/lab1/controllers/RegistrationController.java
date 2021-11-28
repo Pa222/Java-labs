@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -26,8 +27,8 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/registration")
-    private ResponseEntity register(UserRegisterDto user){
+    @PostMapping("/api/register")
+    private ResponseEntity register(@RequestBody UserRegisterDto user){
         ServiceResult serviceResult = userService.register(user);
 
         if (serviceResult.id == ServiceCode.BAD_REQUEST){
