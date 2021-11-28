@@ -6,6 +6,7 @@ import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
 import com.example.lab1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,32 +26,14 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/registration")
-    private ModelAndView registration(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Register.jsp");
-        return modelAndView;
-    }
-
     @PostMapping("/registration")
-    private ModelAndView register(Model model, @ModelAttribute("User") @Valid UserRegisterDto user, BindingResult result){
-        ModelAndView modelAndView = new ModelAndView();
-
-        if (result.hasErrors()){
-            model.addAttribute("errorMessage", "Все поля должны быть заполнены");
-            modelAndView.setViewName("Register");
-            return modelAndView;
-        }
-
+    private ResponseEntity register(UserRegisterDto user){
         ServiceResult serviceResult = userService.register(user);
 
         if (serviceResult.id == ServiceCode.BAD_REQUEST){
-            model.addAttribute("errorMessage", serviceResult.message);
-            modelAndView.setViewName("Register");
-            return modelAndView;
+            return ResponseEntity.badRequest().build();
         }
 
-        modelAndView.setViewName("redirect:/login");
-        return modelAndView;
+        return ResponseEntity.ok().build();
     }
 }

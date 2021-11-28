@@ -12,19 +12,4 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BasketController {
 
-    @Autowired
-    OrderRepository orderRepository;
-
-    @Autowired
-    GamesRepository gamesRepository;
-
-    @Autowired
-    UsersRepository usersRepository;
-
-    @GetMapping(value = "/basket")
-    private ModelAndView GetBasket(Model model) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Basket");
-        return modelAndView;
-    }
 }

@@ -1,5 +1,6 @@
 package com.example.lab1.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -22,4 +23,11 @@ public class GameDto {
     public String gameDescription;
 
     public float price;
+
+    public GameDto(String title, String publisher, String rating, String gameDescription){
+        this.title = title;
+        this.publisher = publisher;
+        this.rating = rating;
+        this.gameDescription = gameDescription;
+    }
 }
