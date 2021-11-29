@@ -6,13 +6,14 @@ import com.example.lab1.model.Publisher;
 import com.example.lab1.services.PublisherService;
 import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.io.StringWriter;
 
 @Controller
 public class PublisherController {
@@ -51,5 +52,16 @@ public class PublisherController {
         }
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value = "api/get-publishers")
+    public ResponseEntity getPublishers() throws IOException {
+        Iterable<Publisher> publishers = publisherService.getPublishers();
+
+        StringWriter writer = new StringWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(writer, publishers);
+
+        return ResponseEntity.ok(writer.toString());
     }
 }
