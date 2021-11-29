@@ -24,19 +24,56 @@ public class CatalogController {
     @Autowired
     GameService gameService;
 
-    @GetMapping(value = "/api/GetMoviesByPage")
+    @GetMapping(value = "/api/GetGamesByPage")
     @Operation(description = "Filters data got from database and sends a response to client",
-            summary = "Returns view with games list got from db")
-    public ResponseEntity<?> catalog(int page, int size, String title) throws IOException {
-        ArrayList<Game> games = gameService.getGamesByPageNumber(page, size, title);
+            summary = "Returns list with games list got from db")
+    public ResponseEntity<?> catalog(int page, int size, String title, String sort, int priceFrom, int priceTo, boolean rating18) throws IOException {
+        ArrayList<Game> games = new ArrayList<>();
+
+        if (title == ""){
+            games = gameService.getGamesByPageNumber(page, size, null);
+        }
+        else {
+            games = gameService.getGamesByPageNumber(page, size, title);
+        }
 
         if (games == null){
             return (ResponseEntity<?>) ResponseEntity.badRequest();
         }
 
+        switch (sort){
+            case "priceAsc":
+                games.sort(Game.PRICE_ASCENDING_COMPARATOR);
+                break;
+            case "priceDesc":
+                games.sort(Game.PRICE_DESCENDING_COMPARATOR);
+                break;
+            case "titleAsc":
+                games.sort(Game.TITLE_ASCENDING_COMPARATOR);
+                break;
+            case "titleDesc":
+                games.sort(Game.TITLE_DESCENDING_COMPARATOR);
+                break;
+        }
+
+        ArrayList<Game> out_games = new ArrayList<>();
+        
+        for(Game game : games){
+            if (rating18){
+                if (game.getPrice() >= priceFrom && game.getPrice() <= priceTo){
+                    out_games.add(game);
+                }
+            }
+            else if (!game.getRating().equals("18+")){
+                if (game.getPrice() >= priceFrom && game.getPrice() <= priceTo){
+                    out_games.add(game);
+                }
+            }
+        }
+
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(writer, games);
+        mapper.writeValue(writer, out_games);
 
         return ResponseEntity.ok(writer.toString());
     }

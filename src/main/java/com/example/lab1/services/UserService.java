@@ -50,6 +50,8 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    public User getUserByLogin(String login){return usersRepository.getByLogin(login);}
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return usersRepository.getByLogin(s);

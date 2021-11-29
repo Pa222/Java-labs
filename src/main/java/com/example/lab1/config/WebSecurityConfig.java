@@ -2,10 +2,10 @@ package com.example.lab1.config;
 
 import com.example.lab1.filters.JwtFilter;
 import com.example.lab1.services.UserService;
-import io.swagger.models.HttpMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,13 +36,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService);
     }
 
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
+        http.cors().and().csrf()
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth",
-                        "/api/GetMoviesByPage",
+                        "/api/GetGamesByPage",
                         "/api/register",
                         "/api/login"
                 )
@@ -57,6 +59,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers(String.valueOf(HttpMethod.GET));
+        web.ignoring().antMatchers(HttpMethod.GET);
     }
 }
