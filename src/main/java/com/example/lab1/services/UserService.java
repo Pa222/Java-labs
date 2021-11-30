@@ -42,6 +42,12 @@ public class UserService implements UserDetailsService {
     }
 
     public ServiceResult register(UserRegisterDto info){
+        User check = usersRepository.getByLogin(info.login);
+
+        if (check != null){
+            return new ServiceResult(ServiceCode.BAD_REQUEST, "Email already taken");
+        }
+
         User user = new User();
         try{
             byte[] salt = Hasher.getSalt();

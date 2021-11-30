@@ -26,12 +26,6 @@ CREATE PROCEDURE GetUserByLogin @login varchar(255) as
 	SELECT * FROM users WHERE login = @login;
 go
 
-insert into user_order (total_amount, user_id) values (10, 1)
-
-insert into order_games (order_id, game_id) values (1, 1), (1, 2), (1, 10),  (1, 15);
-
-exec GetUserOrderGames 1, 1;
-
 go
 CREATE PROCEDURE GetUserOrderGamesIds @order_id int, @user_id int as
 	SELECT g.id as id

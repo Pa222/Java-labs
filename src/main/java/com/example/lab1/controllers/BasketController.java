@@ -1,6 +1,7 @@
 package com.example.lab1.controllers;
 
 import com.example.lab1.dto.GameOrderInfoDto;
+import com.example.lab1.email.EmailService;
 import com.example.lab1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
