@@ -43,10 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/api/auth",
+                .antMatchers(
+                        "/api/auth",
                         "/api/GetGamesByPage",
                         "/api/register",
-                        "/api/login"
+                        "/api/login",
+                        "/api/get-pages-amount"
                 )
                 .permitAll()
                 .anyRequest()
@@ -55,5 +57,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception{
+        web.ignoring().antMatchers(HttpMethod.GET);
     }
 }

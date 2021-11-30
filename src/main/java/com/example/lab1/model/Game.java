@@ -71,9 +71,6 @@ public class Game {
     @NotNull
     private float price;
 
-    @ManyToMany(mappedBy = "games")
-    Set<Order> orders;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
