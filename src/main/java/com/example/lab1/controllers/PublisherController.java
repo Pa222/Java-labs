@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 @Controller
 public class PublisherController {
@@ -40,7 +41,9 @@ public class PublisherController {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok().build();
+        ArrayList<Publisher> res = (ArrayList<Publisher>) publisherService.getPublishers();
+
+        return ResponseEntity.ok(res);
     }
 
     @PutMapping(value = "/api/editpublisher")
@@ -63,5 +66,16 @@ public class PublisherController {
         mapper.writeValue(writer, publishers);
 
         return ResponseEntity.ok(writer.toString());
+    }
+
+    @GetMapping(value = "/api/get-publisher-by-id")
+    public ResponseEntity getPublisherById(Long id){
+        Publisher publisher = publisherService.getById(id);
+
+        if (publisher == null){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(publisher);
     }
 }

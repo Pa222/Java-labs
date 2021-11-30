@@ -1,11 +1,13 @@
 package com.example.lab1.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
+@AllArgsConstructor
 public class GameEditDto {
 
     @NotBlank

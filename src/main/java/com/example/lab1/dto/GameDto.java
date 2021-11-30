@@ -24,10 +24,11 @@ public class GameDto {
 
     public float price;
 
-    public GameDto(String title, String publisher, String rating, String gameDescription){
+    public GameDto(String title, String publisher, String rating, String gameDescription, float price){
         this.title = title;
         this.publisher = publisher;
         this.rating = rating;
         this.gameDescription = gameDescription;
+        this.price = price;
     }
 }
