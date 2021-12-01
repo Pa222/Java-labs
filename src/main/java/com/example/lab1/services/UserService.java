@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -73,8 +74,30 @@ public class UserService implements UserDetailsService {
         return res;
     }
 
+    public ServiceResult createOrder(Long userId, float total){
+        try{
+            usersRepository.createOrder(userId, total);
+        } catch (Exception e){
+            return new ServiceResult(ServiceCode.BAD_REQUEST, e.getMessage());
+        }
+        return new ServiceResult(ServiceCode.CREATED, "Success");
+    }
+
+    @Transactional
+    public ServiceResult addGamesToOrder(int orderId, Game[] games){
+        try{
+            for (int i = 0; i < games.length; i++) {
+                usersRepository.addGameToOrder((long) orderId, games[i].getId());
+            }
+        } catch(Exception e){
+            return new ServiceResult(ServiceCode.BAD_REQUEST, e.getMessage());
+        }
+        return new ServiceResult(ServiceCode.OK, "Success");
+    }
 
     public User getUserByLogin(String login){return usersRepository.getByLogin(login);}
+
+    public Integer getLastOrderId(Long userId){return usersRepository.getLastOrderId(userId);}
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

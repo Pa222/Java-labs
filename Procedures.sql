@@ -4,6 +4,9 @@ DROP PROCEDURE GetUserRolesIds;
 DROP PROCEDURE CreateUser;
 DROP PROCEDURE DropUser;
 DROP PROCEDURE GrantAdminToUser;
+DROP PROCEDURE GetLastOrderId;
+DROP PROCEDURE CreateOrder;
+DROP PROCEDURE AddGameToOrder;
 DROP PROCEDURE GetPublishers;
 DROP PROCEDURE GetPublishersByPageNumber;
 DROP PROCEDURE GetPublisherByName;
@@ -86,6 +89,21 @@ select * from user_order;
 ------------------------------------------------------------------------------------------
 -- Order
 ------------------------------------------------------------------------------------------
+
+go
+CREATE PROCEDURE GetLastOrderId @user_id int as
+	SELECT TOP 1 id FROM user_order WHERE user_id = @user_id ORDER BY id desc;
+go
+
+go
+CREATE PROCEDURE CreateOrder @user_id int, @total float as
+	INSERT INTO user_order (user_id, total_amount) values (@user_id, @total);
+go
+
+go
+CREATE PROCEDURE AddGameToOrder @order_id int, @game_id int as
+	INSERT INTO order_games (game_id, order_id) values (@game_id, @order_id);
+go
 
 ------------------------------------------------------------------------------------------
 -- Order

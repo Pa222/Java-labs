@@ -31,7 +31,7 @@ CREATE TABLE users
 CREATE TABLE user_order
 (
 	id int identity(1, 1),
-	total_amount float default(0),
+	total_amount float(10, 2) default(0),
 	user_id int,
 	constraint PK_user_order primary key (id),
 	foreign key (user_id) references users(id)
