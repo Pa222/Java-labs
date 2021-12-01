@@ -1,6 +1,7 @@
 DROP PROCEDURE GetUserByLogin;
 DROP PROCEDURE GetUserOrderGamesIds;
 DROP PROCEDURE GetUserRolesIds;
+DROP PROCEDURE GetUserOrdersIds;
 DROP PROCEDURE CreateUser;
 DROP PROCEDURE DropUser;
 DROP PROCEDURE GrantAdminToUser;
@@ -51,6 +52,11 @@ CREATE PROCEDURE GetUserRolesIds @id int as
 go
 
 go
+CREATE PROCEDURE GetUserOrdersIds @id int as 
+	SELECT id from user_order WHERE user_id = @id;
+go
+
+go
 CREATE PROCEDURE CreateUser @login varchar(255), @password varchar(255), @salt varbinary(255), @name varchar(255) as
 	INSERT INTO users (login, name, password, salt) values (@login, @name, @password, @salt);
 	declare @user_id int;
@@ -77,10 +83,11 @@ CREATE PROCEDURE GrantAdminToUser @id int as
 	INSERT INTO users_roles (user_id, role_id) values (@id, @role_id);
 go
 
-select * from users;
-select * from users_roles;
-select * from order_games;
+delete from order_games;
+delete from user_order;
+
 select * from user_order;
+select * from order_games;
 
 ------------------------------------------------------------------------------------------
 -- Users

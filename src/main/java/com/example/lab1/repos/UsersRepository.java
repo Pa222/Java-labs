@@ -21,6 +21,9 @@ public interface UsersRepository  extends CrudRepository<User, Long> {
     @Query(value = "exec GetUserRolesIds :id", nativeQuery = true)
     Iterable<Integer> getUserRolesIds(@Param("id") Long userId);
 
+    @Query(value = "exec GetUserOrdersIds :id", nativeQuery = true)
+    Iterable<Integer> getUserOrdersIds(@Param("id") Long id);
+
     @Procedure(name = "Dropuser")
     void createUser(String login, String password, byte[] salt, String name);
 

@@ -99,6 +99,8 @@ public class UserService implements UserDetailsService {
 
     public Integer getLastOrderId(Long userId){return usersRepository.getLastOrderId(userId);}
 
+    public Iterable<Integer> getUserOrdersIds(Long userId){return usersRepository.getUserOrdersIds(userId);}
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return usersRepository.getByLogin(s);
