@@ -45,6 +45,21 @@ CREATE TABLE order_games
 	foreign key (order_id) references user_order(id)
 );
 
+CREATE TABLE roles(
+	id int identity(1, 1),
+	name varchar(10),
+	constraint roles_PK primary key(id)
+);
+
+CREATE TABLE users_roles(
+	user_id int,
+	role_id int,
+	foreign key (user_id) references users(id),
+	foreign key (role_id) references roles(id)
+)
+
+INSERT INTO roles (name) values ('user'), ('admin');
+
 INSERT INTO Publishers (publisher_name) values ('Valve'), ('Behavior'), ('Mojang');
 
 INSERT INTO Games (publisher_id, title, rating, price, game_description) values (1, 'Dota 2', '17+', 0, 'Самая популярная игра в Steam

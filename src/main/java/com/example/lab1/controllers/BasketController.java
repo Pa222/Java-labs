@@ -5,6 +5,7 @@ import com.example.lab1.dto.GameOrderInfoDto;
 import com.example.lab1.email.EmailService;
 import com.example.lab1.model.Game;
 import com.example.lab1.model.User;
+import com.example.lab1.repos.UsersRepository;
 import com.example.lab1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,9 @@ public class BasketController {
     @Autowired
     EmailService emailService;
 
+    @Autowired
+    UsersRepository usersRepository;
+
     @GetMapping(value = "/api/get-user-orders")
     public ResponseEntity getUserOrders(Long orderId, Long userId){
         ArrayList<GameOrderInfoDto> games = userService.getUserOrderGames(orderId, userId);
@@ -33,7 +37,9 @@ public class BasketController {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok(games);
+        User user = usersRepository.findById(userId).get();
+
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping(value = "/api/create-order")

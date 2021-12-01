@@ -47,6 +47,7 @@ public class LoginController {
         UserInfoDto ret = new UserInfoDto();
         ret.setLogin(user.getLogin());
         ret.setName(user.getName());
+        ret.setRoles(user.getRoles());
 
         return ResponseEntity.ok(ret);
     }

@@ -52,11 +52,7 @@ public class UserService implements UserDetailsService {
         try{
             byte[] salt = Hasher.getSalt();
             byte[] hashedPassword = Hasher.getSaltedHash(info.password, salt);
-            user.setLogin(info.login);
-            user.setSalt(salt);
-            user.setPassword(Hasher.toHex(hashedPassword));
-            user.setName(info.name);
-            usersRepository.save(user);
+            usersRepository.createUser(info.login, Hasher.toHex(hashedPassword), salt, info.name);
             return new ServiceResult(ServiceCode.CREATED, "User registered");
         } catch (NoSuchAlgorithmException e) {
             return new ServiceResult(ServiceCode.BAD_REQUEST, "Server error: " + e.getMessage());
@@ -76,6 +72,7 @@ public class UserService implements UserDetailsService {
 
         return res;
     }
+
 
     public User getUserByLogin(String login){return usersRepository.getByLogin(login);}
 

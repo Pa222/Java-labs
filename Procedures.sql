@@ -1,5 +1,9 @@
 DROP PROCEDURE GetUserByLogin;
 DROP PROCEDURE GetUserOrderGamesIds;
+DROP PROCEDURE GetUserRolesIds;
+DROP PROCEDURE CreateUser;
+DROP PROCEDURE DropUser;
+DROP PROCEDURE GrantAdminToUser;
 DROP PROCEDURE GetPublishers;
 DROP PROCEDURE GetPublishersByPageNumber;
 DROP PROCEDURE GetPublisherByName;
@@ -34,6 +38,46 @@ CREATE PROCEDURE GetUserOrderGamesIds @order_id int, @user_id int as
 			INNER JOIN games g ON g.id = og.game_id
 		WHERE uo.user_id = @user_id AND uo.id = @order_id;
 go
+
+go
+CREATE PROCEDURE GetUserRolesIds @id int as
+	SELECT role_id FROM users u 
+		INNER JOIN users_roles ur ON u.id = ur.user_id
+		INNER JOIN roles r ON r.id = ur.role_id
+		WHERE u.id = @id;
+go
+
+go
+CREATE PROCEDURE CreateUser @login varchar(255), @password varchar(255), @salt varbinary(255), @name varchar(255) as
+	INSERT INTO users (login, name, password, salt) values (@login, @name, @password, @salt);
+	declare @user_id int;
+	declare @role_id int;
+	set @user_id = (SELECT id FROM users WHERE login = @login);
+	set @role_id = (SELECT id FROM roles WHERE name = 'user');
+	INSERT INTO users_roles (user_id, role_id) values (@user_id, @role_id);
+go
+
+go
+CREATE PROCEDURE DropUser @id int as
+	DELETE FROM users_roles WHERE user_id = @id;
+	declare @order_id int;
+	set @order_id = (SELECT id FROM user_order WHERE user_id = @id);
+	DELETE FROM order_games WHERE order_id = @order_id;
+	DELETE FROM user_order WHERE user_id = @id;
+	DELETE FROM users WHERE id = @id;
+go
+
+go
+CREATE PROCEDURE GrantAdminToUser @id int as
+	declare @role_id int;
+	set @role_id = (SELECT id FROM roles WHERE name = 'admin');
+	INSERT INTO users_roles (user_id, role_id) values (@id, @role_id);
+go
+
+select * from users;
+select * from users_roles;
+select * from order_games;
+select * from user_order;
 
 ------------------------------------------------------------------------------------------
 -- Users

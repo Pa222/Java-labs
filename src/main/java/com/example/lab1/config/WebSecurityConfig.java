@@ -51,8 +51,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/get-pages-amount"
                 )
                 .permitAll()
-                .anyRequest()
+                .antMatchers(
+                                "/api/get-game-by-id",
+                                "/api/get-user-orders",
+                                "/api/create-order"
+                )
                 .authenticated()
+                .anyRequest()
+                .hasAuthority("admin")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
