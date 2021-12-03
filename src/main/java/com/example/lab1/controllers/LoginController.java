@@ -7,6 +7,8 @@ import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
 import com.example.lab1.services.UserService;
 import com.example.lab1.utils.Jwt;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Returns new JWT generated using provided UserLoginDto")
     @PostMapping(value = "/api/auth")
     public ResponseEntity auth(@RequestBody UserLoginDto info){
         ServiceResult result = userService.login(info);
@@ -35,6 +39,8 @@ public class LoginController {
     }
 
     @CrossOrigin
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Returns information of authorized user")
     @GetMapping(value = "api/get-user")
     public ResponseEntity getUser(@RequestHeader("Authorization") String token){
         String login = jwt.getLoginFromToken(token.substring(7));

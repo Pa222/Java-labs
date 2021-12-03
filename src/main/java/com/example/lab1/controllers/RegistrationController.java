@@ -5,6 +5,8 @@ import com.example.lab1.repos.UsersRepository;
 import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
 import com.example.lab1.services.UserService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Creates a new entry of user in the database")
     @PostMapping("/api/register")
     private ResponseEntity register(@RequestBody UserRegisterDto user){
         ServiceResult serviceResult = userService.register(user);

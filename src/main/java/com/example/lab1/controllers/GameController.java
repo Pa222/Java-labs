@@ -7,6 +7,8 @@ import com.example.lab1.model.Game;
 import com.example.lab1.services.GameService;
 import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Creates a new entry of game in the database")
     @PostMapping(value = {"/api/addgame"})
     public ResponseEntity saveNewGame(@RequestBody GameDto game) {
         ServiceResult serviceResult = gameService.addGame(game);
@@ -34,11 +38,15 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Returns amount of pages with games by provided size")
     @GetMapping(value = "/api/get-pages-amount")
-    public ResponseEntity getPagesAmount(){
-        return ResponseEntity.ok(Math.round(gameService.getGamesCount() / 8));
+    public ResponseEntity getPagesAmount(int size){
+        return ResponseEntity.ok(Math.round(gameService.getGamesCount() / size));
     }
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Removes entry of game in the database using provided GameDeleteDto")
     @DeleteMapping(value = {"/api/deletegame"})
     public ResponseEntity deleteGame(@RequestBody GameDeleteDto game){
         ServiceResult result = gameService.deleteGame(game);
@@ -52,6 +60,8 @@ public class GameController {
         return ResponseEntity.ok(games);
     }
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Updates entry of game in the database using provided GameEditDto")
     @PutMapping(value = {"/api/editgame"})
     public ResponseEntity editGame(@RequestBody GameEditDto game){
         ServiceResult serviceresult = gameService.editGame(game);
@@ -63,10 +73,11 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Returns an entry of game from the database using provided id")
     @GetMapping(value = "/api/get-game-by-id")
     public ResponseEntity getGameById(Long id){
         Game game = gameService.getGameById(id);
-
         if (game == null){
             return ResponseEntity.badRequest().build();
         }

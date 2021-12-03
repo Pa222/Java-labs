@@ -5,6 +5,8 @@ import com.example.lab1.dto.OrderInfoDto;
 import com.example.lab1.model.User;
 import com.example.lab1.services.UserService;
 import com.example.lab1.utils.Jwt;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Return OrderInfoDto entity with order information inside")
     @GetMapping(value = "/api/get-order-info")
     public ResponseEntity getOrderInfo(@RequestHeader("Authorization") String token, Long orderId){
         String login = jwt.getLoginFromToken(token.substring(7));
@@ -44,6 +48,8 @@ public class UserController {
         return ResponseEntity.ok(info);
     }
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Returns a list of user orders ids")
     @GetMapping(value = "/api/get-user-orders-ids")
     public ResponseEntity getUserOrdersIds(@RequestHeader("Authorization") String token){
         String login = jwt.getLoginFromToken(token.substring(7));

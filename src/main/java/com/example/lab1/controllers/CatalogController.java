@@ -4,6 +4,7 @@ import com.example.lab1.Filters;
 import com.example.lab1.model.Game;
 import com.example.lab1.services.GameService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,9 @@ public class CatalogController {
     @Autowired
     GameService gameService;
 
+    @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
+    @Operation(description = "Returns a list of games by requested page number and page size")
     @GetMapping(value = "/api/GetGamesByPage")
-    @Operation(description = "Filters data got from database and sends a response to client",
-            summary = "Returns list with games list got from db")
     public ResponseEntity<?> catalog(int page, int size, String title, String sort, int priceFrom, int priceTo, boolean rating18) throws IOException {
         ArrayList<Game> games = new ArrayList<>();
 

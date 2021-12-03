@@ -1,7 +1,6 @@
 package com.example.lab1.controllers;
 
 import com.example.lab1.dto.CreateOrderDto;
-import com.example.lab1.dto.GameOrderInfoDto;
 import com.example.lab1.email.EmailService;
 import com.example.lab1.model.Game;
 import com.example.lab1.model.User;
@@ -9,15 +8,13 @@ import com.example.lab1.repos.UsersRepository;
 import com.example.lab1.services.ServiceCode;
 import com.example.lab1.services.ServiceResult;
 import com.example.lab1.services.UserService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 public class BasketController {
@@ -31,19 +28,8 @@ public class BasketController {
     @Autowired
     UsersRepository usersRepository;
 
-    @GetMapping(value = "/api/get-user-orders")
-    public ResponseEntity getUserOrders(Long orderId, Long userId){
-        ArrayList<GameOrderInfoDto> games = userService.getUserOrderGames(orderId, userId);
-
-        if (games == null){
-            return ResponseEntity.badRequest().build();
-        }
-
-        User user = usersRepository.findById(userId).get();
-
-        return ResponseEntity.ok(user);
-    }
-
+    @ApiResponse(code = 200, response = ResponseEntity.class, message = "Order created successfully")
+    @Operation(description = "Creates new entry of order in the database and send order confirmation message to user email")
     @PostMapping(value = "/api/create-order")
     public ResponseEntity createOrder(@RequestBody CreateOrderDto order){
         if (order == null){
