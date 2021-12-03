@@ -1,5 +1,6 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.aop.LogAnnotation;
 import com.example.lab1.dto.CreateOrderDto;
 import com.example.lab1.email.EmailService;
 import com.example.lab1.model.Game;
@@ -28,6 +29,7 @@ public class BasketController {
     @Autowired
     UsersRepository usersRepository;
 
+    @LogAnnotation
     @ApiResponse(code = 200, response = ResponseEntity.class, message = "Order created successfully")
     @Operation(description = "Creates new entry of order in the database and send order confirmation message to user email")
     @PostMapping(value = "/api/create-order")

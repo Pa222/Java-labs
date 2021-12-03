@@ -1,5 +1,6 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.aop.LogAnnotation;
 import com.example.lab1.dto.UserInfoDto;
 import com.example.lab1.dto.UserLoginDto;
 import com.example.lab1.model.User;
@@ -23,6 +24,7 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns new JWT generated using provided UserLoginDto")
     @PostMapping(value = "/api/auth")
@@ -38,6 +40,7 @@ public class LoginController {
         return ResponseEntity.ok(token);
     }
 
+    @LogAnnotation
     @CrossOrigin
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns information of authorized user")

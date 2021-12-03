@@ -1,5 +1,6 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.aop.LogAnnotation;
 import com.example.lab1.dto.GameOrderInfoDto;
 import com.example.lab1.dto.OrderInfoDto;
 import com.example.lab1.model.User;
@@ -24,6 +25,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Return OrderInfoDto entity with order information inside")
     @GetMapping(value = "/api/get-order-info")
@@ -48,6 +50,7 @@ public class UserController {
         return ResponseEntity.ok(info);
     }
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns a list of user orders ids")
     @GetMapping(value = "/api/get-user-orders-ids")

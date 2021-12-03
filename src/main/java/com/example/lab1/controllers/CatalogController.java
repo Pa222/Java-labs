@@ -1,5 +1,6 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.aop.LogAnnotation;
 import com.example.lab1.model.Game;
 import com.example.lab1.services.GameService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +21,7 @@ public class CatalogController {
     @Autowired
     GameService gameService;
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns a list of games by requested page number and page size")
     @GetMapping(value = "/api/GetGamesByPage")

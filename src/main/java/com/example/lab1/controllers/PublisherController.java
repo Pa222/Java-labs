@@ -1,5 +1,6 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.aop.LogAnnotation;
 import com.example.lab1.dto.PublisherDeleteDto;
 import com.example.lab1.dto.PublisherDto;
 import com.example.lab1.model.Publisher;
@@ -24,6 +25,7 @@ public class PublisherController {
     @Autowired
     private PublisherService publisherService;
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Creates new entry of publisher in the database using provided PublisherDto")
     @PostMapping(value = "/api/addpublisher")
@@ -37,6 +39,7 @@ public class PublisherController {
         return ResponseEntity.ok().build();
     }
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Removes entry of publiher from the database using provided PublisherDeleteDto")
     @DeleteMapping(value = "/api/deletepublisher")
@@ -52,6 +55,7 @@ public class PublisherController {
         return ResponseEntity.ok(res);
     }
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Updates entry of publisher in the database")
     @PutMapping(value = "/api/editpublisher")
@@ -65,6 +69,7 @@ public class PublisherController {
         return ResponseEntity.ok().build();
     }
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns a list of publishers")
     @GetMapping(value = "api/get-publishers")
@@ -78,6 +83,7 @@ public class PublisherController {
         return ResponseEntity.ok(writer.toString());
     }
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns a publisher using provided id")
     @GetMapping(value = "/api/get-publisher-by-id")

@@ -1,5 +1,6 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.aop.LogAnnotation;
 import com.example.lab1.dto.UserRegisterDto;
 import com.example.lab1.repos.UsersRepository;
 import com.example.lab1.services.ServiceCode;
@@ -29,6 +30,7 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
+    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Creates a new entry of user in the database")
     @PostMapping("/api/register")
