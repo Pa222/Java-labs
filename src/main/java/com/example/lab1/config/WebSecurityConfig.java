@@ -46,9 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/api/auth",
                         "/api/GetGamesByPage",
+                        "/api/get-pages-amount",
                         "/api/register",
-                        "/api/login",
-                        "/api/get-pages-amount"
+                        "/api/login"
                 )
                 .permitAll()
                 .antMatchers(

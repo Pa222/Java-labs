@@ -1,6 +1,5 @@
 package com.example.lab1.controllers;
 
-import com.example.lab1.Filters;
 import com.example.lab1.model.Game;
 import com.example.lab1.services.GameService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,16 +7,12 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Objects;
 
 @RestController
 public class CatalogController {
