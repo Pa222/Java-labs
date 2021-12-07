@@ -30,13 +30,17 @@ public class PublisherController {
     @Operation(description = "Creates new entry of publisher in the database using provided PublisherDto")
     @PostMapping(value = "/api/addpublisher")
     public ResponseEntity AddPublisher(@RequestBody PublisherDto publisher){
-        ServiceResult serviceResult = publisherService.addPublisher(publisher);
+        try {
+            ServiceResult serviceResult = publisherService.addPublisher(publisher);
 
-        if (serviceResult.id == ServiceCode.BAD_REQUEST){
-            return  ResponseEntity.badRequest().build();
+            if (serviceResult.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            return ResponseEntity.ok().build();
+        } catch(Exception ex){
+            return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.ok().build();
     }
 
     @LogAnnotation
@@ -44,15 +48,19 @@ public class PublisherController {
     @Operation(description = "Removes entry of publiher from the database using provided PublisherDeleteDto")
     @DeleteMapping(value = "/api/deletepublisher")
     public ResponseEntity delete(@RequestBody PublisherDeleteDto publisher){
-        ServiceResult result = publisherService.deletePublisher(publisher);
+        try {
+            ServiceResult result = publisherService.deletePublisher(publisher);
 
-        if (result.id == ServiceCode.BAD_REQUEST){
+            if (result.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            ArrayList<Publisher> res = (ArrayList<Publisher>) publisherService.getPublishers();
+
+            return ResponseEntity.ok(res);
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        ArrayList<Publisher> res = (ArrayList<Publisher>) publisherService.getPublishers();
-
-        return ResponseEntity.ok(res);
     }
 
     @LogAnnotation
@@ -60,13 +68,17 @@ public class PublisherController {
     @Operation(description = "Updates entry of publisher in the database")
     @PutMapping(value = "/api/editpublisher")
     public ResponseEntity editPublisher(@RequestBody Publisher publisher){
-        ServiceResult result = publisherService.editPublisher(publisher);
+        try {
+            ServiceResult result = publisherService.editPublisher(publisher);
 
-        if (result.id == ServiceCode.BAD_REQUEST){
+            if (result.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            return ResponseEntity.ok().build();
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.ok().build();
     }
 
     @LogAnnotation
@@ -74,13 +86,17 @@ public class PublisherController {
     @Operation(description = "Returns a list of publishers")
     @GetMapping(value = "api/get-publishers")
     public ResponseEntity getPublishers() throws IOException {
-        Iterable<Publisher> publishers = publisherService.getPublishers();
+        try {
+            Iterable<Publisher> publishers = publisherService.getPublishers();
 
-        StringWriter writer = new StringWriter();
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(writer, publishers);
+            StringWriter writer = new StringWriter();
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(writer, publishers);
 
-        return ResponseEntity.ok(writer.toString());
+            return ResponseEntity.ok(writer.toString());
+        } catch(Exception ex){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @LogAnnotation
@@ -88,12 +104,16 @@ public class PublisherController {
     @Operation(description = "Returns a publisher using provided id")
     @GetMapping(value = "/api/get-publisher-by-id")
     public ResponseEntity getPublisherById(Long id){
-        Publisher publisher = publisherService.getById(id);
+        try {
+            Publisher publisher = publisherService.getById(id);
 
-        if (publisher == null){
+            if (publisher == null) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            return ResponseEntity.ok(publisher);
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.ok(publisher);
     }
 }

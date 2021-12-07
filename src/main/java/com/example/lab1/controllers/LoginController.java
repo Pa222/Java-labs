@@ -29,15 +29,19 @@ public class LoginController {
     @Operation(description = "Returns new JWT generated using provided UserLoginDto")
     @PostMapping(value = "/api/auth")
     public ResponseEntity auth(@RequestBody UserLoginDto info){
-        ServiceResult result = userService.login(info);
+        try {
+            ServiceResult result = userService.login(info);
 
-        if (result.id == ServiceCode.BAD_REQUEST){
+            if (result.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            String token = jwt.generateToken(info.login);
+
+            return ResponseEntity.ok(token);
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        String token = jwt.generateToken(info.login);
-
-        return ResponseEntity.ok(token);
     }
 
     @LogAnnotation
@@ -46,18 +50,22 @@ public class LoginController {
     @Operation(description = "Returns information of authorized user")
     @GetMapping(value = "api/get-user")
     public ResponseEntity getUser(@RequestHeader("Authorization") String token){
-        String login = jwt.getLoginFromToken(token.substring(7));
-        User user = userService.getUserByLogin(login);
+        try {
+            String login = jwt.getLoginFromToken(token.substring(7));
+            User user = userService.getUserByLogin(login);
 
-        if (user == null){
+            if (user == null) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            UserInfoDto ret = new UserInfoDto();
+            ret.setLogin(user.getLogin());
+            ret.setName(user.getName());
+            ret.setRoles(user.getRoles());
+
+            return ResponseEntity.ok(ret);
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        UserInfoDto ret = new UserInfoDto();
-        ret.setLogin(user.getLogin());
-        ret.setName(user.getName());
-        ret.setRoles(user.getRoles());
-
-        return ResponseEntity.ok(ret);
     }
 }

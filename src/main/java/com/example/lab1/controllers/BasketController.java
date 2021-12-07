@@ -34,43 +34,47 @@ public class BasketController {
     @Operation(description = "Creates new entry of order in the database and send order confirmation message to user email")
     @PostMapping(value = "/api/create-order")
     public ResponseEntity createOrder(@RequestBody CreateOrderDto order){
-        if (order == null){
+        try {
+            if (order == null) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            User user = userService.getUserByLogin(order.getUserEmail());
+
+            if (user == null) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            float total = 0;
+
+            for (int i = 0; i < order.getGames().length; i++) {
+                total += order.getGames()[i].getPrice();
+            }
+
+            ServiceResult result1 = userService.createOrder(user.getId(), total);
+
+            if (result1.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            int orderId = userService.getLastOrderId(user.getId());
+
+            ServiceResult result2 = userService.addGamesToOrder(orderId, order.getGames());
+
+            if (result2.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            try {
+                emailService.send(order.getUserEmail(), buildMessage(order.getGames(), user.getName(), total));
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            return ResponseEntity.ok().build();
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        User user = userService.getUserByLogin(order.getUserEmail());
-
-        if (user == null){
-            return ResponseEntity.badRequest().build();
-        }
-
-        float total = 0;
-
-        for (int i = 0; i < order.getGames().length; i++) {
-            total += order.getGames()[i].getPrice();
-        }
-
-        ServiceResult result1 = userService.createOrder(user.getId(), total);
-
-        if (result1.id == ServiceCode.BAD_REQUEST){
-            return ResponseEntity.badRequest().build();
-        }
-
-        int orderId = userService.getLastOrderId(user.getId());
-
-        ServiceResult result2 = userService.addGamesToOrder(orderId, order.getGames());
-
-        if (result2.id == ServiceCode.BAD_REQUEST){
-            return ResponseEntity.badRequest().build();
-        }
-
-        try{
-            emailService.send(order.getUserEmail(), buildMessage(order.getGames(), user.getName(), total));
-        } catch (Exception e){
-            return ResponseEntity.badRequest().build();
-        }
-
-        return ResponseEntity.ok().build();
     }
 
     private String buildMessage(Game[] games, String userName, float total){

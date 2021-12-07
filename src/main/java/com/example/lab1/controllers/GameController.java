@@ -1,5 +1,6 @@
 package com.example.lab1.controllers;
 
+import com.example.lab1.Exceptions.MyException;
 import com.example.lab1.aop.LogAnnotation;
 import com.example.lab1.dto.GameDeleteDto;
 import com.example.lab1.dto.GameDto;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 
 @Controller
@@ -30,7 +32,12 @@ public class GameController {
     @Operation(description = "Creates a new entry of game in the database")
     @PostMapping(value = {"/api/addgame"})
     public ResponseEntity saveNewGame(@RequestBody GameDto game) {
-        ServiceResult serviceResult = gameService.addGame(game);
+        ServiceResult serviceResult = null;
+        try {
+            serviceResult = gameService.addGame(game);
+        } catch (MyException e) {
+            return ResponseEntity.badRequest().build();
+        }
 
         if (serviceResult.id == ServiceCode.BAD_REQUEST){
             return ResponseEntity.badRequest().build();
@@ -52,15 +59,19 @@ public class GameController {
     @Operation(description = "Removes entry of game in the database using provided GameDeleteDto")
     @DeleteMapping(value = {"/api/deletegame"})
     public ResponseEntity deleteGame(@RequestBody GameDeleteDto game){
-        ServiceResult result = gameService.deleteGame(game);
+        try {
+            ServiceResult result = gameService.deleteGame(game);
 
-        if (result.id == ServiceCode.BAD_REQUEST){
+
+            if (result.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            ArrayList<Game> games = gameService.getGamesByPageNumber(1, 8, null);
+            return ResponseEntity.ok(games);
+        } catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        ArrayList<Game> games = gameService.getGamesByPageNumber(1, 8, null);
-
-        return ResponseEntity.ok(games);
     }
 
     @LogAnnotation
@@ -68,13 +79,17 @@ public class GameController {
     @Operation(description = "Updates entry of game in the database using provided GameEditDto")
     @PutMapping(value = {"/api/editgame"})
     public ResponseEntity editGame(@RequestBody GameEditDto game){
-        ServiceResult serviceresult = gameService.editGame(game);
+        try {
+            ServiceResult serviceresult = gameService.editGame(game);
 
-        if (serviceresult.id == ServiceCode.BAD_REQUEST){
+            if (serviceresult.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            return ResponseEntity.ok().build();
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.ok().build();
     }
 
     @LogAnnotation
@@ -82,14 +97,18 @@ public class GameController {
     @Operation(description = "Returns an entry of game from the database using provided id")
     @GetMapping(value = "/api/get-game-by-id")
     public ResponseEntity getGameById(Long id){
-        Game game = gameService.getGameById(id);
-        if (game == null){
+        try {
+            Game game = gameService.getGameById(id);
+            if (game == null) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            GameEditDto result = new GameEditDto(game.getTitle(), game.getPublisher().getPublisherName(),
+                    game.getRating(), game.getGameDescription(), game.getId(), game.getPrice());
+
+            return ResponseEntity.ok(result);
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        GameEditDto result = new GameEditDto(game.getTitle(), game.getPublisher().getPublisherName(),
-                game.getRating(), game.getGameDescription(), game.getId(), game.getPrice());
-
-        return ResponseEntity.ok(result);
     }
 }

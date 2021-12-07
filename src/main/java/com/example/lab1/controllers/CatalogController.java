@@ -26,53 +26,55 @@ public class CatalogController {
     @Operation(description = "Returns a list of games by requested page number and page size")
     @GetMapping(value = "/api/GetGamesByPage")
     public ResponseEntity<?> catalog(int page, int size, String title, String sort, int priceFrom, int priceTo, boolean rating18) throws IOException {
-        ArrayList<Game> games = new ArrayList<>();
+        try {
+            ArrayList<Game> games = new ArrayList<>();
 
-        if (title == ""){
-            games = gameService.getGamesByPageNumber(page, size, null);
-        }
-        else {
-            games = gameService.getGamesByPageNumber(page, size, title);
-        }
+            if (title == "") {
+                games = gameService.getGamesByPageNumber(page, size, null);
+            } else {
+                games = gameService.getGamesByPageNumber(page, size, title);
+            }
 
-        if (games == null){
-            return (ResponseEntity<?>) ResponseEntity.badRequest();
-        }
+            if (games == null) {
+                return (ResponseEntity<?>) ResponseEntity.badRequest();
+            }
 
-        switch (sort){
-            case "priceAsc":
-                games.sort(Game.PRICE_ASCENDING_COMPARATOR);
-                break;
-            case "priceDesc":
-                games.sort(Game.PRICE_DESCENDING_COMPARATOR);
-                break;
-            case "titleAsc":
-                games.sort(Game.TITLE_ASCENDING_COMPARATOR);
-                break;
-            case "titleDesc":
-                games.sort(Game.TITLE_DESCENDING_COMPARATOR);
-                break;
-        }
+            switch (sort) {
+                case "priceAsc":
+                    games.sort(Game.PRICE_ASCENDING_COMPARATOR);
+                    break;
+                case "priceDesc":
+                    games.sort(Game.PRICE_DESCENDING_COMPARATOR);
+                    break;
+                case "titleAsc":
+                    games.sort(Game.TITLE_ASCENDING_COMPARATOR);
+                    break;
+                case "titleDesc":
+                    games.sort(Game.TITLE_DESCENDING_COMPARATOR);
+                    break;
+            }
 
-        ArrayList<Game> out_games = new ArrayList<>();
-        
-        for(Game game : games){
-            if (rating18){
-                if (game.getPrice() >= priceFrom && game.getPrice() <= priceTo){
-                    out_games.add(game);
+            ArrayList<Game> out_games = new ArrayList<>();
+
+            for (Game game : games) {
+                if (rating18) {
+                    if (game.getPrice() >= priceFrom && game.getPrice() <= priceTo) {
+                        out_games.add(game);
+                    }
+                } else if (!game.getRating().equals("18+")) {
+                    if (game.getPrice() >= priceFrom && game.getPrice() <= priceTo) {
+                        out_games.add(game);
+                    }
                 }
             }
-            else if (!game.getRating().equals("18+")){
-                if (game.getPrice() >= priceFrom && game.getPrice() <= priceTo){
-                    out_games.add(game);
-                }
-            }
+
+            StringWriter writer = new StringWriter();
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(writer, out_games);
+
+            return ResponseEntity.ok(writer.toString());
+        } catch(Exception ex){
+            return ResponseEntity.badRequest().build();
         }
-
-        StringWriter writer = new StringWriter();
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(writer, out_games);
-
-        return ResponseEntity.ok(writer.toString());
     }
 }

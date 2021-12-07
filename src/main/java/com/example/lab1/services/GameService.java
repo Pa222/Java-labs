@@ -1,5 +1,6 @@
 package com.example.lab1.services;
 
+import com.example.lab1.Exceptions.MyException;
 import com.example.lab1.dto.GameDeleteDto;
 import com.example.lab1.dto.GameDto;
 import com.example.lab1.dto.GameEditDto;
@@ -26,19 +27,23 @@ public class GameService {
 
     public Game getGameById(Long id) { return gamesRepository.getGameById(id); }
 
-    public ServiceResult addGame(GameDto info){
+    public ServiceResult addGame(GameDto info) throws MyException {
 
-        Matcher matcher = _pattern.matcher(info.rating);
+        try {
+            Matcher matcher = _pattern.matcher(info.rating);
 
-        if (!matcher.matches()){
-            return new ServiceResult(ServiceCode.BAD_REQUEST, "Rating incorrect. Example: 18+");
+            if (!matcher.matches()) {
+                return new ServiceResult(ServiceCode.BAD_REQUEST, "Rating incorrect. Example: 18+");
+            }
+
+            Publisher publisher = publisherRepository.findByName(info.publisher);
+
+            gamesRepository.addNewGame(publisher.getId(), info.title, info.rating, info.price, info.gameDescription);
+
+            return new ServiceResult(ServiceCode.CREATED, "Game added");
+        } catch(Exception ex){
+            throw new MyException(ex.getMessage());
         }
-
-        Publisher publisher = publisherRepository.findByName(info.publisher);
-
-        gamesRepository.addNewGame(publisher.getId(), info.title, info.rating, info.price, info.gameDescription);
-
-        return new ServiceResult(ServiceCode.CREATED, "Game added");
     }
 
     public ServiceResult editGame(GameEditDto info){

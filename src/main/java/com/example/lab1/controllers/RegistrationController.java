@@ -32,12 +32,16 @@ public class RegistrationController {
     @Operation(description = "Creates a new entry of user in the database")
     @PostMapping("/api/register")
     private ResponseEntity register(@RequestBody UserRegisterDto user){
-        ServiceResult serviceResult = userService.register(user);
+        try {
+            ServiceResult serviceResult = userService.register(user);
 
-        if (serviceResult.id == ServiceCode.BAD_REQUEST){
+            if (serviceResult.id == ServiceCode.BAD_REQUEST) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            return ResponseEntity.ok().build();
+        } catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.ok().build();
     }
 }

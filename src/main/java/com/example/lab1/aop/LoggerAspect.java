@@ -13,20 +13,20 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class LoggerAspect {
 
-    @Pointcut("@annotation(LogAnnotation)")
-    public void allMethodsExec(){
-
-    }
-
-    @AfterReturning("allMethodsExec()")
-    public void logSuccessMethod(JoinPoint jp){
-        String methodName = jp.getSignature().getName();
-        log.info(methodName + ": Success completion");
-    }
-
-    @AfterThrowing("allMethodsExec()")
-    public void logFailMethod(JoinPoint jp){
-        String methodName = jp.getSignature().getName();
-        log.error(methodName + ": Execution failed");
-    }
+//    @Pointcut("@annotation(LogAnnotation)")
+//    public void allMethodsExec(){
+//
+//    }
+//
+//    @AfterReturning("allMethodsExec()")
+//    public void logSuccessMethod(JoinPoint jp){
+//        String methodName = jp.getSignature().getName();
+//        log.info(methodName + ": Success completion");
+//    }
+//
+//    @AfterThrowing("allMethodsExec()")
+//    public void logFailMethod(JoinPoint jp){
+//        String methodName = jp.getSignature().getName();
+//        log.error(methodName + ": Execution failed");
+//    }
 }
