@@ -466,3 +466,167 @@
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+"2021-12-07 12:56:42 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 12:56:42 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 12:56:42 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2021-12-07 13:03:05 [main] INFO  com.example.lab1.UserServiceTests - Starting UserServiceTests using Java 11.0.12 on DESKTOP-CHOIDVE with PID 7824 (started by Па2 in D:\Code\Java\Current sem\Lab1)
+""2021-12-07 13:03:05 [main] INFO  com.example.lab1.UserServiceTests - No active profile set, falling back to default profiles: default
+""2021-12-07 13:03:07 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2021-12-07 13:03:07 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 116 ms. Found 3 JPA repository interfaces.
+""2021-12-07 13:03:09 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2021-12-07 13:03:10 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2021-12-07 13:03:10 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2021-12-07 13:03:10 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""2021-12-07 13:03:11 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2021-12-07 13:03:11 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+""2021-12-07 13:03:13 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2021-12-07 13:03:13 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:03:13 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2021-12-07 13:03:15 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', GET] with []
+""2021-12-07 13:03:16 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@78fd1179, org.springframework.security.web.context.SecurityContextPersistenceFilter@7f065f9e, org.springframework.security.web.header.HeaderWriterFilter@6cd8c373, org.springframework.web.filter.CorsFilter@13cec4ff, org.springframework.security.web.authentication.logout.LogoutFilter@480fb706, com.example.lab1.filters.JwtFilter@3a61d819, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@154cbb46, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@158b8d10, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5e08ed28, org.springframework.security.web.session.SessionManagementFilter@7ef34eb3, org.springframework.security.web.access.ExceptionTranslationFilter@6f0df74, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@523e019c]
+""2021-12-07 13:03:16 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/WEB-INF/ (please add some templates or check your Thymeleaf configuration)
+""2021-12-07 13:03:17 [main] INFO  com.example.lab1.UserServiceTests - Started UserServiceTests in 12.926 seconds (JVM running for 16.33)
+""2021-12-07 13:03:18 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:03:18 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 13:03:18 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2021-12-07 13:04:20 [main] INFO  com.example.lab1.UserServiceTests - Starting UserServiceTests using Java 11.0.12 on DESKTOP-CHOIDVE with PID 4504 (started by Па2 in D:\Code\Java\Current sem\Lab1)
+""2021-12-07 13:04:20 [main] INFO  com.example.lab1.UserServiceTests - No active profile set, falling back to default profiles: default
+""2021-12-07 13:04:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2021-12-07 13:04:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 103 ms. Found 3 JPA repository interfaces.
+""2021-12-07 13:04:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2021-12-07 13:04:24 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2021-12-07 13:04:24 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2021-12-07 13:04:24 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""2021-12-07 13:04:25 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2021-12-07 13:04:25 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+""2021-12-07 13:04:27 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2021-12-07 13:04:27 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:04:27 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2021-12-07 13:04:29 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', GET] with []
+""2021-12-07 13:04:30 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@b67b359, org.springframework.security.web.context.SecurityContextPersistenceFilter@5dfc7b3f, org.springframework.security.web.header.HeaderWriterFilter@289b7efe, org.springframework.web.filter.CorsFilter@98c4a8b, org.springframework.security.web.authentication.logout.LogoutFilter@36dbfa68, com.example.lab1.filters.JwtFilter@1bca9b64, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@106c3e0a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5578ed7e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@130bd00e, org.springframework.security.web.session.SessionManagementFilter@4d86f330, org.springframework.security.web.access.ExceptionTranslationFilter@4ceb368b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@58e9e852]
+""2021-12-07 13:04:30 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/WEB-INF/ (please add some templates or check your Thymeleaf configuration)
+""2021-12-07 13:04:31 [main] INFO  com.example.lab1.UserServiceTests - Started UserServiceTests in 12.318 seconds (JVM running for 14.966)
+""2021-12-07 13:04:32 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:04:32 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 13:04:32 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2021-12-07 13:06:29 [main] INFO  com.example.lab1.UserServiceTests - Starting UserServiceTests using Java 11.0.12 on DESKTOP-CHOIDVE with PID 13992 (started by Па2 in D:\Code\Java\Current sem\Lab1)
+""2021-12-07 13:06:29 [main] INFO  com.example.lab1.UserServiceTests - No active profile set, falling back to default profiles: default
+""2021-12-07 13:06:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2021-12-07 13:06:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 100 ms. Found 3 JPA repository interfaces.
+""2021-12-07 13:06:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2021-12-07 13:06:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2021-12-07 13:06:34 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2021-12-07 13:06:35 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""2021-12-07 13:06:35 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2021-12-07 13:06:35 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+""2021-12-07 13:06:37 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2021-12-07 13:06:37 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:06:37 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2021-12-07 13:06:40 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', GET] with []
+""2021-12-07 13:06:40 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4eb69e8d, org.springframework.security.web.context.SecurityContextPersistenceFilter@106c3e0a, org.springframework.security.web.header.HeaderWriterFilter@449f9628, org.springframework.web.filter.CorsFilter@78fd1179, org.springframework.security.web.authentication.logout.LogoutFilter@66d766b9, com.example.lab1.filters.JwtFilter@386ea60f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@58fbecde, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@e594c46, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@13cec4ff, org.springframework.security.web.session.SessionManagementFilter@2719139f, org.springframework.security.web.access.ExceptionTranslationFilter@42bbd21c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4582da06]
+""2021-12-07 13:06:41 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/WEB-INF/ (please add some templates or check your Thymeleaf configuration)
+""2021-12-07 13:06:42 [main] INFO  com.example.lab1.UserServiceTests - Started UserServiceTests in 13.796 seconds (JVM running for 16.647)
+""2021-12-07 13:06:43 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:06:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 13:06:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2021-12-07 13:17:28 [main] INFO  com.example.lab1.GameServiceTests - Starting GameServiceTests using Java 11.0.12 on DESKTOP-CHOIDVE with PID 8564 (started by Па2 in D:\Code\Java\Current sem\Lab1)
+""2021-12-07 13:17:28 [main] INFO  com.example.lab1.GameServiceTests - No active profile set, falling back to default profiles: default
+""2021-12-07 13:17:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2021-12-07 13:17:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 98 ms. Found 3 JPA repository interfaces.
+""2021-12-07 13:17:32 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2021-12-07 13:17:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2021-12-07 13:17:33 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2021-12-07 13:17:33 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""2021-12-07 13:17:34 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2021-12-07 13:17:34 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+""2021-12-07 13:17:36 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2021-12-07 13:17:36 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:17:36 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2021-12-07 13:17:38 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', GET] with []
+""2021-12-07 13:17:38 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@38624a3a, org.springframework.security.web.context.SecurityContextPersistenceFilter@57f1fbae, org.springframework.security.web.header.HeaderWriterFilter@77737e3e, org.springframework.web.filter.CorsFilter@23b02f37, org.springframework.security.web.authentication.logout.LogoutFilter@2688b2be, com.example.lab1.filters.JwtFilter@4f836d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34ac72c3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ff00844, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@73cdf5f9, org.springframework.security.web.session.SessionManagementFilter@4ceb368b, org.springframework.security.web.access.ExceptionTranslationFilter@1851f19f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@79a88f45]
+""2021-12-07 13:17:39 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/WEB-INF/ (please add some templates or check your Thymeleaf configuration)
+""2021-12-07 13:17:40 [main] INFO  com.example.lab1.GameServiceTests - Started GameServiceTests in 12.394 seconds (JVM running for 15.31)
+""2021-12-07 13:17:41 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:17:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 13:17:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2021-12-07 13:18:35 [main] INFO  com.example.lab1.GameServiceTests - Starting GameServiceTests using Java 11.0.12 on DESKTOP-CHOIDVE with PID 20304 (started by Па2 in D:\Code\Java\Current sem\Lab1)
+""2021-12-07 13:18:35 [main] INFO  com.example.lab1.GameServiceTests - No active profile set, falling back to default profiles: default
+""2021-12-07 13:18:38 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2021-12-07 13:18:38 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 92 ms. Found 3 JPA repository interfaces.
+""2021-12-07 13:18:39 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2021-12-07 13:18:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2021-12-07 13:18:40 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2021-12-07 13:18:40 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""2021-12-07 13:18:41 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2021-12-07 13:18:41 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+""2021-12-07 13:18:43 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2021-12-07 13:18:43 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:18:43 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2021-12-07 13:18:45 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', GET] with []
+""2021-12-07 13:18:45 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@523e019c, org.springframework.security.web.context.SecurityContextPersistenceFilter@4ceb368b, org.springframework.security.web.header.HeaderWriterFilter@5cb3cfef, org.springframework.web.filter.CorsFilter@1c10eb3a, org.springframework.security.web.authentication.logout.LogoutFilter@22c14d10, com.example.lab1.filters.JwtFilter@6d2f910b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@42bbd21c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@606d2a92, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@49f32bcb, org.springframework.security.web.session.SessionManagementFilter@14d9ae22, org.springframework.security.web.access.ExceptionTranslationFilter@7de2c19c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6a9c848]
+""2021-12-07 13:18:46 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/WEB-INF/ (please add some templates or check your Thymeleaf configuration)
+""2021-12-07 13:18:47 [main] INFO  com.example.lab1.GameServiceTests - Started GameServiceTests in 12.292 seconds (JVM running for 15.24)
+""2021-12-07 13:18:48 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:18:48 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 13:18:48 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2021-12-07 13:19:20 [main] INFO  com.example.lab1.GameServiceTests - Starting GameServiceTests using Java 11.0.12 on DESKTOP-CHOIDVE with PID 6712 (started by Па2 in D:\Code\Java\Current sem\Lab1)
+""2021-12-07 13:19:20 [main] INFO  com.example.lab1.GameServiceTests - No active profile set, falling back to default profiles: default
+""2021-12-07 13:19:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2021-12-07 13:19:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 100 ms. Found 3 JPA repository interfaces.
+""2021-12-07 13:19:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2021-12-07 13:19:24 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2021-12-07 13:19:24 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2021-12-07 13:19:25 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""2021-12-07 13:19:25 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2021-12-07 13:19:25 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+""2021-12-07 13:19:27 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2021-12-07 13:19:27 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:19:27 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2021-12-07 13:19:29 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', GET] with []
+""2021-12-07 13:19:29 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@38624a3a, org.springframework.security.web.context.SecurityContextPersistenceFilter@57f1fbae, org.springframework.security.web.header.HeaderWriterFilter@77737e3e, org.springframework.web.filter.CorsFilter@23b02f37, org.springframework.security.web.authentication.logout.LogoutFilter@2688b2be, com.example.lab1.filters.JwtFilter@4f836d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34ac72c3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ff00844, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@73cdf5f9, org.springframework.security.web.session.SessionManagementFilter@4ceb368b, org.springframework.security.web.access.ExceptionTranslationFilter@1851f19f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@79a88f45]
+""2021-12-07 13:19:30 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/WEB-INF/ (please add some templates or check your Thymeleaf configuration)
+""2021-12-07 13:19:31 [main] INFO  com.example.lab1.GameServiceTests - Started GameServiceTests in 12.247 seconds (JVM running for 15.113)
+""2021-12-07 13:19:32 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:19:32 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 13:19:32 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2021-12-07 13:20:23 [main] INFO  com.example.lab1.GameServiceTests - Starting GameServiceTests using Java 11.0.12 on DESKTOP-CHOIDVE with PID 16000 (started by Па2 in D:\Code\Java\Current sem\Lab1)
+""2021-12-07 13:20:23 [main] INFO  com.example.lab1.GameServiceTests - No active profile set, falling back to default profiles: default
+""2021-12-07 13:20:25 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2021-12-07 13:20:25 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 123 ms. Found 3 JPA repository interfaces.
+""2021-12-07 13:20:27 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2021-12-07 13:20:27 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2021-12-07 13:20:28 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2021-12-07 13:20:28 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""2021-12-07 13:20:28 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2021-12-07 13:20:28 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+""2021-12-07 13:20:30 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2021-12-07 13:20:30 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:20:30 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2021-12-07 13:20:32 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', GET] with []
+""2021-12-07 13:20:33 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7d619bcb, org.springframework.security.web.context.SecurityContextPersistenceFilter@449f9628, org.springframework.security.web.header.HeaderWriterFilter@5c450960, org.springframework.web.filter.CorsFilter@57f83dc7, org.springframework.security.web.authentication.logout.LogoutFilter@3f9ee527, com.example.lab1.filters.JwtFilter@4d145177, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a84beb7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1e8b0ab5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@75937998, org.springframework.security.web.session.SessionManagementFilter@28901fe7, org.springframework.security.web.access.ExceptionTranslationFilter@35fd03d9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@56f4f385]
+""2021-12-07 13:20:33 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/WEB-INF/ (please add some templates or check your Thymeleaf configuration)
+""2021-12-07 13:20:34 [main] INFO  com.example.lab1.GameServiceTests - Started GameServiceTests in 11.89 seconds (JVM running for 14.65)
+""2021-12-07 13:20:35 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:20:35 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 13:20:35 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+""2021-12-07 13:20:57 [main] INFO  com.example.lab1.GameServiceTests - Starting GameServiceTests using Java 11.0.12 on DESKTOP-CHOIDVE with PID 13840 (started by Па2 in D:\Code\Java\Current sem\Lab1)
+""2021-12-07 13:20:57 [main] INFO  com.example.lab1.GameServiceTests - No active profile set, falling back to default profiles: default
+""2021-12-07 13:20:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2021-12-07 13:20:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 105 ms. Found 3 JPA repository interfaces.
+""2021-12-07 13:21:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+""2021-12-07 13:21:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+""2021-12-07 13:21:01 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+""2021-12-07 13:21:02 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final
+""2021-12-07 13:21:02 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2021-12-07 13:21:02 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+""2021-12-07 13:21:04 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2021-12-07 13:21:04 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:21:04 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2021-12-07 13:21:06 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/**', GET] with []
+""2021-12-07 13:21:06 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@38624a3a, org.springframework.security.web.context.SecurityContextPersistenceFilter@57f1fbae, org.springframework.security.web.header.HeaderWriterFilter@77737e3e, org.springframework.web.filter.CorsFilter@23b02f37, org.springframework.security.web.authentication.logout.LogoutFilter@2688b2be, com.example.lab1.filters.JwtFilter@4f836d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34ac72c3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ff00844, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@73cdf5f9, org.springframework.security.web.session.SessionManagementFilter@4ceb368b, org.springframework.security.web.access.ExceptionTranslationFilter@1851f19f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@79a88f45]
+""2021-12-07 13:21:07 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/WEB-INF/ (please add some templates or check your Thymeleaf configuration)
+""2021-12-07 13:21:08 [main] INFO  com.example.lab1.GameServiceTests - Started GameServiceTests in 12.504 seconds (JVM running for 15.143)
+""2021-12-07 13:21:09 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+""2021-12-07 13:21:09 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+""2021-12-07 13:21:09 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+"

@@ -1,5 +1,6 @@
 package com.example.lab1;
 
+import com.example.lab1.dto.GameOrderInfoDto;
 import com.example.lab1.model.Game;
 import com.example.lab1.repos.GamesRepository;
 import com.example.lab1.repos.UsersRepository;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -32,7 +34,12 @@ public class UserServiceTests {
     void getUserOrderGames_ShouldReturnArrayList_Positive(){
         ArrayList<Integer> expectedIds = new ArrayList<>(4);
         Game expectedGame = new Game();
-        when(usersRepository.getUserOrderGamesIds(1L, 1L)).thenReturn(expectedIds);
-        when(gamesRepository.getGameById(1L)).thenReturn(expectedGame);
+        ArrayList<GameOrderInfoDto> expectedResult = new ArrayList<>();
+
+        lenient().when(usersRepository.getUserOrderGamesIds(1L, 1L)).thenReturn(expectedIds);
+        lenient().when(gamesRepository.getGameById(1L)).thenReturn(expectedGame);
+
+        var actual = userService.getUserOrderGames(1L, 1L);
+        assertThat(actual).isEqualTo(expectedResult);
     }
 }
