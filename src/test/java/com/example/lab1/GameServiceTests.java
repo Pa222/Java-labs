@@ -15,7 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -43,6 +42,7 @@ class GameServiceTests {
     void addGame_ShouldReturnServiceResult_Positive() throws MyException {
         var expectedPublisher = new Publisher(1L,"Test");
         var expectedResult = new ServiceResult(ServiceCode.CREATED, "Game added");
+
         when(publisherRepository.findByName("Test")).thenReturn(expectedPublisher);
         doNothing().when(gamesRepository).addNewGame(1L, "asd", "18+", 12, "asd");
 

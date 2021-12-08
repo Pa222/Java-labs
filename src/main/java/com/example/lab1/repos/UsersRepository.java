@@ -24,7 +24,7 @@ public interface UsersRepository  extends CrudRepository<User, Long> {
     @Query(value = "exec GetUserOrdersIds :id", nativeQuery = true)
     Iterable<Integer> getUserOrdersIds(@Param("id") Long id);
 
-    @Procedure(name = "Dropuser")
+    @Procedure(name = "CreateUser")
     void createUser(String login, String password, byte[] salt, String name);
 
     @Procedure(name = "CreateOrder")
