@@ -27,7 +27,6 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Creates a new entry of game in the database")
     @PostMapping(value = {"/api/addgame"})
@@ -46,7 +45,6 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns amount of pages with games by provided size")
     @GetMapping(value = "/api/get-pages-amount")
@@ -54,7 +52,6 @@ public class GameController {
         return ResponseEntity.ok(Math.round(gameService.getGamesCount() / size));
     }
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Removes entry of game in the database using provided GameDeleteDto")
     @DeleteMapping(value = {"/api/deletegame"})
@@ -74,7 +71,6 @@ public class GameController {
         }
     }
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Updates entry of game in the database using provided GameEditDto")
     @PutMapping(value = {"/api/editgame"})
@@ -92,7 +88,6 @@ public class GameController {
         }
     }
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns an entry of game from the database using provided id")
     @GetMapping(value = "/api/get-game-by-id")

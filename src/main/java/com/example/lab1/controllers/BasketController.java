@@ -29,7 +29,6 @@ public class BasketController {
     @Autowired
     UsersRepository usersRepository;
 
-    @LogAnnotation
     @ApiResponse(code = 200, response = ResponseEntity.class, message = "Order created successfully")
     @Operation(description = "Creates new entry of order in the database and send order confirmation message to user email")
     @PostMapping(value = "/api/create-order")

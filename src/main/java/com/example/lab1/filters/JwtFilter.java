@@ -1,5 +1,6 @@
 package com.example.lab1.filters;
 
+import com.example.lab1.Exceptions.MyException;
 import com.example.lab1.services.UserService;
 import com.example.lab1.utils.Jwt;
 import io.jsonwebtoken.io.IOException;
@@ -33,7 +34,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if(null != authorization && authorization.startsWith("Bearer ")) {
             token = authorization.substring(7);
-            userName = jwt.getLoginFromToken(token);
+            try {
+                userName = jwt.getLoginFromToken(token);
+            } catch (MyException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         if(null != userName && SecurityContextHolder.getContext().getAuthentication() == null) {

@@ -1,5 +1,6 @@
 package com.example.lab1.utils;
 
+import com.example.lab1.Exceptions.MyException;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Service;
 
@@ -24,17 +25,17 @@ public class Jwt {
         try {
             Jwts.parser().setSigningKey(secretKet).parseClaimsJws(token);
             return true;
-        } catch (ExpiredJwtException expEx) {
-        } catch (UnsupportedJwtException unsEx) {
-        } catch (MalformedJwtException mjEx) {
-        } catch (SignatureException sEx) {
         } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
-    public String getLoginFromToken(String token) {
-        Claims claims = Jwts.parser().setSigningKey(secretKet).parseClaimsJws(token).getBody();
-        return claims.getSubject();
+    public String getLoginFromToken(String token) throws MyException {
+        try {
+            Claims claims = Jwts.parser().setSigningKey(secretKet).parseClaimsJws(token).getBody();
+            return claims.getSubject();
+        } catch(Exception ex){
+            throw new MyException("JWT invalid");
+        }
     }
 }

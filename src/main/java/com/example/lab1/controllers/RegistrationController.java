@@ -27,7 +27,6 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Creates a new entry of user in the database")
     @PostMapping("/api/register")

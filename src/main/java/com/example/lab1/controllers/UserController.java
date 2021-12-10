@@ -25,7 +25,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Return OrderInfoDto entity with order information inside")
     @GetMapping(value = "/api/get-order-info")
@@ -54,7 +53,6 @@ public class UserController {
         }
     }
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns a list of user orders ids")
     @GetMapping(value = "/api/get-user-orders-ids")

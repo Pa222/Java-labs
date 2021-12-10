@@ -24,7 +24,6 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns new JWT generated using provided UserLoginDto")
     @PostMapping(value = "/api/auth")
@@ -44,7 +43,6 @@ public class LoginController {
         }
     }
 
-    @LogAnnotation
     @CrossOrigin
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns information of authorized user")

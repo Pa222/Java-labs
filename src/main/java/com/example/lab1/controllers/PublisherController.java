@@ -25,7 +25,6 @@ public class PublisherController {
     @Autowired
     private PublisherService publisherService;
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Creates new entry of publisher in the database using provided PublisherDto")
     @PostMapping(value = "/api/addpublisher")
@@ -43,7 +42,6 @@ public class PublisherController {
         }
     }
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Removes entry of publiher from the database using provided PublisherDeleteDto")
     @DeleteMapping(value = "/api/deletepublisher")
@@ -81,7 +79,6 @@ public class PublisherController {
         }
     }
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns a list of publishers")
     @GetMapping(value = "api/get-publishers")
@@ -99,7 +96,6 @@ public class PublisherController {
         }
     }
 
-    @LogAnnotation
     @ApiResponse(code = 200,response = ResponseEntity.class, message = "OK")
     @Operation(description = "Returns a publisher using provided id")
     @GetMapping(value = "/api/get-publisher-by-id")
